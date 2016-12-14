@@ -1,0 +1,27 @@
+{
+    "version": "1.9.0-dev.20160525-1.0",
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "inlineSources": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+        "strictNullChecks": true,
+        "listFiles": true,
+        "diagnostics": true,
+        "mapRoot": "",
+        "lib": ["es6", "dom"]
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "tasks",
+        "config"
+    ]
+}
