@@ -155,6 +155,8 @@ export class BuecherService {
     }
 
     /**
+     *
+     * 
      * Ein Buch anhand der ID suchen
      * @param id Die ID des gesuchten Buchs
      */
