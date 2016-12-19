@@ -26,10 +26,11 @@ import LogoComponent from './logo.component';
 import LogoutComponent from './logout.component';
 import MainComponent from './main.component';
 import NavComponent from './nav.component';
+import Nav2Component from './nav2.component';
 
 const komponentenExport: Array<Type<any>> = [
     FooterComponent, HeaderComponent, LoginComponent, LogoComponent,
-    LogoutComponent, MainComponent, NavComponent
+    LogoutComponent, MainComponent, NavComponent, Nav2Component
 ];
 const komponentenIntern: Array<Type<any>> = [];
 

@@ -114,12 +114,12 @@ import {Component} from '@angular/core';
     // https://github.com/angular/angular/issues/2529
     template: `
         <div class="row">
-            <!-- Eigene Komponente fuer die Kopfleiste -->
-            <my-header></my-header>
+            <!-- Eigene Komponente fuer die Kopfleiste
+            <my-header></my-header> -->
         </div>
         <div class="row">
             <!-- Eigene Komponente fuer die Navigationsleiste -->
-            <my-nav></my-nav>
+            <my-nav2></my-nav2>
             <!-- Eigene Komponente fuer den Haupteil: austauschbar durch Routing -->
             <my-main></my-main>
         </div>

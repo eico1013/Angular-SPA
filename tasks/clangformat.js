@@ -26,6 +26,7 @@ import {dateien} from '../gulp.config';
 
 export const clangformat = (done) => {
     'use strict';
+    // Alternative: yargs https://www.npmjs.com/package/yargs
     const argv = minimist(process.argv.slice(2));
     if (argv.nocheck) {
         done();
@@ -33,7 +34,7 @@ export const clangformat = (done) => {
     }
 
     // http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-    src(dateien.ts)
+    return src(dateien.ts)
         // clang ist ein C/C++/Objective-C Compiler des Projekts LLVM http://www.llvm.org
         // Formatierungseinstellungen in .clang-format:
         // Google (default) http://google-styleguide.googlecode.com/svn/trunk/cppguide.html
@@ -42,10 +43,9 @@ export const clangformat = (done) => {
         // Mozilla https://developer.mozilla.org/en-US/docs/Developer_Guide/Coding_Style
         // WebKit http://www.webkit.org/coding/coding-style.html
         .pipe(checkFormat('file', clangFormatPkg, {verbose: true}))
-        .on('warning', (e) => {
+        .on('warning', function(e) {
             process.stdout.write(e.message);
             done();
             process.exit(1);
         });
-    done();
 };

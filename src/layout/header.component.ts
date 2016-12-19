@@ -32,14 +32,12 @@ import {Component} from '@angular/core';
         -->
         <header class="col-xs-12 jz-app-header">
             <div class="clearfix">
-                <div class="ml-0 col-xs-4">
-                    <my-logo></my-logo>
-                </div>
                 <div class="mr-0 col-xs-8">
                     <my-login></my-login>
                     <my-logout></my-logout>
                 </div>
             </div>
+
         </header>
     `,
     styleUrls: ['./layout/header.component.min.css']
