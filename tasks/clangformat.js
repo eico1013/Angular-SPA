@@ -17,8 +17,8 @@
 
 /* global process */
 
-import {src} from 'gulp';
-import {checkFormat} from 'gulp-clang-format';
+import {src, dest} from 'gulp';
+import {checkFormat, format} from 'gulp-clang-format';
 import clangFormatPkg from 'clang-format';
 import minimist from 'minimist';
 
@@ -34,7 +34,7 @@ export const clangformat = (done) => {
     }
 
     // http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-    return src(dateien.ts)
+    return src(dateien.ts, {base: '.'})
         // clang ist ein C/C++/Objective-C Compiler des Projekts LLVM http://www.llvm.org
         // Formatierungseinstellungen in .clang-format:
         // Google (default) http://google-styleguide.googlecode.com/svn/trunk/cppguide.html
@@ -43,6 +43,8 @@ export const clangformat = (done) => {
         // Mozilla https://developer.mozilla.org/en-US/docs/Developer_Guide/Coding_Style
         // WebKit http://www.webkit.org/coding/coding-style.html
         .pipe(checkFormat('file', clangFormatPkg, {verbose: true}))
+        .pipe(format('file', clangFormatPkg))
+        .pipe(dest('.'))
         .on('warning', function(e) {
             process.stdout.write(e.message);
             done();
