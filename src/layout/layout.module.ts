@@ -22,15 +22,19 @@ import SharedModule from '../shared/shared.module';
 import FooterComponent from './footer.component';
 import HeaderComponent from './header.component';
 import LoginComponent from './login.component';
+import Login2Component from './login2.component';
 import LogoComponent from './logo.component';
 import LogoutComponent from './logout.component';
+import Logout2Component from './logout2.component';
+
 import MainComponent from './main.component';
 import NavComponent from './nav.component';
 import Nav2Component from './nav2.component';
 
 const komponentenExport: Array<Type<any>> = [
-    FooterComponent, HeaderComponent, LoginComponent, LogoComponent,
-    LogoutComponent, MainComponent, NavComponent, Nav2Component
+    FooterComponent, HeaderComponent, LoginComponent, Login2Component,
+    LogoComponent, LogoutComponent, Logout2Component, MainComponent,
+    NavComponent, Nav2Component
 ];
 const komponentenIntern: Array<Type<any>> = [];
 

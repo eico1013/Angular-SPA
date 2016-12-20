@@ -16,7 +16,6 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-
 import {IamService, ROLLE_ADMIN} from '../iam/iam.service';
 import {log} from '../shared';
 
@@ -27,14 +26,17 @@ import {log} from '../shared';
     selector: 'my-nav2',
     // Internationalisierung durch z.B. https://github.com/ocombe/ng2-translate
     template: `
+    <div class="container">
         <nav class="navbar navbar-light bg-faded">
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#">Features</a>
                 <a class="nav-item nav-link" href="#">Pricing</a>
                 <a class="nav-item nav-link" href="#">About</a>
+                <my-login2></my-login2>
             </div>
         </nav>
+    </div>
     `,
     styleUrls: ['./layout/nav.component.min.css']
     // styles: ['.jz-app-nav{background-color:#BED6F8}']
