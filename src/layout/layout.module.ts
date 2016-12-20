@@ -20,6 +20,8 @@ import {NgModule, Type} from '@angular/core';
 import ROOT_ROUTES from '../app/root.routes';
 import SharedModule from '../shared/shared.module';
 import FooterComponent from './footer.component';
+import Footer2Component from './footer2.component';
+
 import HeaderComponent from './header.component';
 import LoginComponent from './login.component';
 import Login2Component from './login2.component';
@@ -29,12 +31,11 @@ import Logout2Component from './logout2.component';
 
 import MainComponent from './main.component';
 import NavComponent from './nav.component';
-import Nav2Component from './nav2.component';
 
 const komponentenExport: Array<Type<any>> = [
-    FooterComponent, HeaderComponent, LoginComponent, Login2Component,
-    LogoComponent, LogoutComponent, Logout2Component, MainComponent,
-    NavComponent, Nav2Component
+    FooterComponent, Footer2Component, HeaderComponent, LoginComponent,
+    Login2Component, LogoComponent, LogoutComponent, Logout2Component,
+    MainComponent, NavComponent
 ];
 const komponentenIntern: Array<Type<any>> = [];
 

@@ -125,7 +125,7 @@ import {Component} from '@angular/core';
         </div>
         <div class="row">
             <!-- Eigene Komponente fuer die Fussleiste -->
-            <my-footer></my-footer>
+            <my-footer2></my-footer2>
         </div>
     `
     // encapsulation: ViewEncapsulation.Native
