@@ -31,11 +31,12 @@ import Logout2Component from './logout2.component';
 
 import MainComponent from './main.component';
 import NavComponent from './nav.component';
+import Nav2Component from './nav2.component';
 
 const komponentenExport: Array<Type<any>> = [
     FooterComponent, Footer2Component, HeaderComponent, LoginComponent,
     Login2Component, LogoComponent, LogoutComponent, Logout2Component,
-    MainComponent, NavComponent
+    MainComponent, NavComponent, Nav2Component
 ];
 const komponentenIntern: Array<Type<any>> = [];
 

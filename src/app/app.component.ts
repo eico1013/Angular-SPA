@@ -119,7 +119,7 @@ import {Component} from '@angular/core';
         </div>
         <div class="row">
             <!-- Eigene Komponente fuer die Navigationsleiste -->
-            <my-nav></my-nav>
+            <my-nav2></my-nav2>
             <!-- Eigene Komponente fuer den Haupteil: austauschbar durch Routing -->
             <my-main></my-main>
         </div>
