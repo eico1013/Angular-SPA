@@ -19,7 +19,8 @@
 // // https://github.com/urish/angular2-moment/blob/master/TimeAgoPipe.ts
 // // https://github.com/felixge/node-dateformat
 // // Moment exportiert den Namespace moment und die gleichnamige Function:
-// // http://stackoverflow.com/questions/35254524/using-moment-js-in-angular-2-typescript-application#answer-35255412
+// //
+// http://stackoverflow.com/questions/35254524/using-moment-js-in-angular-2-typescript-application#answer-35255412
 // import * as moment_ from 'moment';
 // import {Moment} from 'moment';
 
@@ -95,15 +96,18 @@
 //             datum = moment(tmp);
 //         }
 //         const buch: Buch = new Buch(
-//             buchServer._id, buchServer.titel, buchServer.rating, buchServer.art,
+//             buchServer._id, buchServer.titel, buchServer.rating,
+//             buchServer.art,
 //             buchServer.verlag, datum, buchServer.preis, buchServer.rabatt,
-//             buchServer.lieferbar, buchServer.schlagwoerter, buchServer.email);
+//             buchServer.lieferbar, buchServer.schlagwoerter,
+//             buchServer.email);
 //         console.log('Buch.fromServer(): buch=', buch);
 //         return buch;
 //     }
 
 //     /**
-//      * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular kommen.
+//      * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular
+//      kommen.
 //      * @param buch JSON-Objekt mit Daten vom Formular
 //      * @return Das initialisierte Buch-Objekt
 //      */
@@ -122,7 +126,8 @@
 
 //         const buch: Buch = new Buch(
 //             buchForm._id, buchForm.titel, +buchForm.rating, buchForm.art,
-//             buchForm.verlag, datumMoment, buchForm.preis, buchForm.rabatt / 100,
+//             buchForm.verlag, datumMoment, buchForm.preis, buchForm.rabatt /
+//             100,
 //             buchForm.lieferbar, schlagwoerter, buchForm.email);
 //         console.log('Buch.fromForm(): buch=', buch);
 //         return buch;
@@ -148,7 +153,8 @@
 //     }
 
 //     /**
-//      * Abfrage, ob im Buchtitel der angegebene Teilstring enthalten ist. Dabei
+//      * Abfrage, ob im Buchtitel der angegebene Teilstring enthalten ist.
+//      Dabei
 //      * wird nicht auf Gross-/Kleinschreibung geachtet.
 //      * @param titel Zu &uuml;berpr&uuml;fender Teilstring
 //      * @return true, falls der Teilstring im Buchtitel enthalten ist. Sonst
