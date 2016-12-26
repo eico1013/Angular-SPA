@@ -28,7 +28,7 @@ import {/*Headers, */ Http /*, RequestOptionsArgs*/, Response, URLSearchParams} 
 // import {Moment} from 'moment';
 
 import {IamService} from '../../iam/iam.service';
-import {BASE_URI, isBlank, isEmpty, isPresent, log, PATH_KUNDEN} from '../../shared';
+import {BASE_URI2, isBlank, isEmpty, isPresent, log, PATH_KUNDEN} from '../../shared';
 // Aus dem SharedModule als Singleton exportiert
 import DiagrammService from '../../shared/diagramm.service';
 import {Kunde, KundeForm, KundeServer} from './index';
@@ -71,7 +71,7 @@ export class KundenService {
             DiagrammService,
         @Inject(Http) private readonly http: Http,
         @Inject(IamService) private readonly iamService: IamService) {
-        this.baseUriKunden = `${BASE_URI}${PATH_KUNDEN}`;
+        this.baseUriKunden = `${BASE_URI2}${PATH_KUNDEN}`;
         console.log(
             'KundenService.constructor(): baseUriKunden=' + this.baseUriKunden);
     }

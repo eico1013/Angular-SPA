@@ -19,10 +19,10 @@ const USER: string = 'admin';
 const PASSWORD: string = 'p';
 const AT: string = '@';
 
-// const SCHEME: string = 'https';
-const SCHEME: string = 'http';
-// const PORT: number = 8443;
-const PORT: number = 8081;
+const SCHEME: string = 'https';
+const SCHEME2: string = 'http';
+const PORT: number = 8443;
+const PORT2: number = 8081;
 const SERVERNAME: string = 'localhost';
 const BASE_PATH: string = '/';
 
@@ -32,8 +32,10 @@ const BASE_PATH: string = '/';
  * Basis-URI, wenn der eigentliche Server verwendet wird.
  * http://admin:p@localhost….
  */
-export const BASE_URI: string =
-    `${SCHEME}://${USER}${PASSWORD}${AT}${SERVERNAME}:${PORT}${BASE_PATH}`;
+export const BASE_URI2: string =
+    `${SCHEME2}://${USER}:${PASSWORD}${AT}${SERVERNAME}:${PORT2}${BASE_PATH}`;
+
+export const BASE_URI: string = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`;
 
 /**
  * Pfad f&uuml;r den Zugriff auf B&uuml;cher, ausgehend von der Basis-URI.
