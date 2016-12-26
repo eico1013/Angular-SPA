@@ -42,7 +42,7 @@ import {log} from '../shared';
                 </div>
 
                 <div class="list-group-item">
-                    <a [routerLink]="'/sucheBuecher'">
+                    <a [routerLink]="'/sucheKunden'">
                         <i class="fa fa-search"></i>
                         <span class="ml-1">Suche</span>
                     </a>

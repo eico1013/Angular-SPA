@@ -26,9 +26,9 @@ import LiniendiagrammComponent from '../buecher/diagramme/liniendiagramm.compone
 import TortendiagrammComponent from '../buecher/diagramme/tortendiagramm.component';
 import SucheBuecherComponent from '../buecher/suche-buecher/suche-buecher.component';
 import UpdateBuchComponent from '../buecher/update-buch/update-buch.component';
-
 import HomeComponent from '../home/home.component';
 import AdminGuard from '../iam/admin.guard';
+import SucheKundenComponent from '../kunden/suche-kunden/suche-kunden.component';
 
 export const HOME_PATH: string = '';
 export const DETAILS_BUCH_PATH: string = 'detailsBuch';
@@ -40,6 +40,7 @@ export const DETAILS_BUCH_PATH: string = 'detailsBuch';
 const routes: Routes = [
     {path: HOME_PATH, component: HomeComponent},
     {path: 'sucheBuecher', component: SucheBuecherComponent},
+    {path: 'sucheKunden', component: SucheKundenComponent},
     // id als Pfad-Parameter
     {path: `${DETAILS_BUCH_PATH}/:id`, component: DetailsBuchComponent}, {
         path: 'updateBuch/:id',
