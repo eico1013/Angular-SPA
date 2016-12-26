@@ -133,14 +133,14 @@ import {KundenService} from '../shared/kunden.service';
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                             <i class="fa fa-info-circle"></i>
                             Hinweis: Keine Eingabe liefert alle B&uuml;cher
                         </div>
-                    </div> -->
+                    </div> 
 
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
@@ -181,7 +181,7 @@ export default class SuchkriterienComponent {
     @log
     onFind(): boolean {
         const suchkriterien: any = {
-            nachname: this.nachname,
+            nachname: this.nachname
             // verlag: this.verlag,
             // art: this.art,
             // javascript: this.javascript,

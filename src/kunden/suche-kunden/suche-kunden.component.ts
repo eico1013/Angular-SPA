@@ -32,7 +32,7 @@ import {log} from '../../shared';
     selector: 'my-suche-kunden',
     template: `
         <my-suchkriterien (waiting)="setWaiting($event)"></my-suchkriterien>
-<!--        <my-suchergebnis [waiting]="waiting"></my-suchergebnis>
+        <my-suchergebnis [waiting]="waiting"></my-suchergebnis>
 
         <!-- alternative Syntax:
                 eigenes Ereignis "waiting" (ausgeloest in SuchKriterien):
@@ -40,7 +40,7 @@ import {log} from '../../shared';
 
                 Property "waiting" in der Komponentenklasse
                 <my-suchergebnis bind-waiting="waiting"></my-suchergebnis>
-        --> -->
+        --> 
     `
 })
 export default class SucheKundenComponent implements OnInit {

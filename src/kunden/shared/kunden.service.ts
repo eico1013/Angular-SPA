@@ -18,7 +18,7 @@
 import {EventEmitter, Inject, Injectable} from '@angular/core';
 // Bereitgestellt durch das HttpModule (s. Re-Export im SharedModule)
 // HttpModule enthaelt nur Services, keine Komponenten
-import {/*Headers, */ Http /*, RequestOptionsArgs*/, Response, URLSearchParams} from '@angular/http';
+import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
 
 // import {ChartConfig, ChartDataSet} from 'chart.js';
 // import * as _ from 'lodash';
@@ -264,38 +264,37 @@ export class KundenService {
     //     this.http.put(uri, body, options).subscribe(nextFn, errorFnPut);
     // }
 
-    // /**
-    //  * Ein Buch l&ouml;schen
-    //  * @param buch Das JSON-Objekt mit dem zu loeschenden Buch
-    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
-    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
-    //  */
-    // @log
-    // remove(
-    //     buch: Buch, successFn: () => void|undefined,
-    //     errorFn: (status: number) => void): void {
-    //     const uri: string = `${this.baseUriBuecher}/${buch._id}`;
-    //     const headers: Headers =
-    //         new Headers({'Authorization':
-    //         this.iamService.getAuthorization()});
-    //     const options: RequestOptionsArgs = {headers: headers};
-    //     console.log('options=', options);
+    /**
+     * Ein Buch l&ouml;schen
+     * @param buch Das JSON-Objekt mit dem zu loeschenden Buch
+     * @param successFn Die Callback-Function fuer den Erfolgsfall
+     * @param errorFn Die Callback-Function fuer den Fehlerfall
+     */
+    @log
+    remove(
+        kunde: Kunde, successFn: () => void|undefined,
+        errorFn: (status: number) => void): void {
+        const uri: string = `${this.baseUriKunden}/${kunde._id}`;
+        const headers: Headers =
+            new Headers({'Authorization': this.iamService.getAuthorization()});
+        const options: RequestOptionsArgs = {headers: headers};
+        console.log('options=', options);
 
-    //     const nextFn: ((response: Response) => void) = (response) => {
-    //         if (isPresent(successFn)) {
-    //             successFn();
-    //         }
-    //     };
-    //     const errorFnDelete: ((errResponse: Response) => void) =
-    //         (errResponse) => {
-    //             if (isPresent(errorFn)) {
-    //                 errorFn(errResponse.status);
-    //             }
-    //         };
+        const nextFn: ((response: Response) => void) = (response) => {
+            if (isPresent(successFn)) {
+                successFn();
+            }
+        };
+        const errorFnDelete: ((errResponse: Response) => void) =
+            (errResponse) => {
+                if (isPresent(errorFn)) {
+                    errorFn(errResponse.status);
+                }
+            };
 
 
-    //     this.http.delete(uri, options).subscribe(nextFn, errorFnDelete);
-    // }
+        this.http.delete(uri, options).subscribe(nextFn, errorFnDelete);
+    }
 
     // // http://www.sitepoint.com/15-best-javascript-charting-libraries
     // // http://thenextweb.com/dd/2015/06/12/20-best-javascript-chart-libraries

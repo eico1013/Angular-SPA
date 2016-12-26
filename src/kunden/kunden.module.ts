@@ -34,9 +34,11 @@ import SharedModule from '../shared/shared.module';
 import {KundenService} from './shared/kunden.service';
 // import GefundeneBuecherComponent from
 // './suche-buecher/gefundene-buecher.component';
+import GefundeneKundenComponent from './suche-kunden/gefundene-kunden.component';
 // import SucheBuecherComponent from './suche-buecher/suche-buecher.component';
 import SucheKundenComponent from './suche-kunden/suche-kunden.component';
 // import SuchergebnisComponent from './suche-buecher/suchergebnis.component';
+import SuchergebnisComponent from './suche-kunden/suchergebnis.component';
 // import SuchkriterienComponent from './suche-buecher/suchkriterien.component';
 import SuchkriterienComponent from './suche-kunden/suchkriterien.component';
 // import UpdateBuchComponent from './update-buch/update-buch.component';
@@ -53,9 +55,8 @@ UpdateBuchComponent*/
 ];
 
 const komponentenIntern: Array<Type<any>> = [
-    /*DetailsSchlagwoerterComponent, DetailsStammdatenComponent,
-    GefundeneBuecherComponent, */ SucheKundenComponent, /*
-     SuchergebnisComponent,*/
+    /*DetailsSchlagwoerterComponent, DetailsStammdatenComponent,*/
+    GefundeneKundenComponent, SucheKundenComponent, SuchergebnisComponent,
     SuchkriterienComponent /*, UpdateSchlagwoerterComponent,
      UpdateStammdatenComponent*/
 ];

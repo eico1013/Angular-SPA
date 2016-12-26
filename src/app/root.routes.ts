@@ -32,6 +32,7 @@ import SucheKundenComponent from '../kunden/suche-kunden/suche-kunden.component'
 
 export const HOME_PATH: string = '';
 export const DETAILS_BUCH_PATH: string = 'detailsBuch';
+export const DETAILS_KUNDE_PATH: string = 'detailsKunde';
 
 // https://angular.io/docs/ts/latest/guide/router.html
 /**
@@ -43,6 +44,12 @@ const routes: Routes = [
     {path: 'sucheKunden', component: SucheKundenComponent},
     // id als Pfad-Parameter
     {path: `${DETAILS_BUCH_PATH}/:id`, component: DetailsBuchComponent}, {
+        path: 'updateBuch/:id',
+        component: UpdateBuchComponent,
+        canActivate: [AdminGuard]
+    },
+    // id als Pfad-Parameter
+    {path: `${DETAILS_KUNDE_PATH}/:id`, component: DetailsBuchComponent}, {
         path: 'updateBuch/:id',
         component: UpdateBuchComponent,
         canActivate: [AdminGuard]
