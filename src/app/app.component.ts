@@ -115,17 +115,17 @@ import {Component} from '@angular/core';
     template: `
         <div class="row">
             <!-- Eigene Komponente fuer die Kopfleiste -->
-            <my-header></my-header>
+            <my-header></my-header> 
         </div>
         <div class="row">
             <!-- Eigene Komponente fuer die Navigationsleiste -->
-            <my-nav></my-nav>
+            <my-nav2></my-nav2>
             <!-- Eigene Komponente fuer den Haupteil: austauschbar durch Routing -->
             <my-main></my-main>
         </div>
         <div class="row">
             <!-- Eigene Komponente fuer die Fussleiste -->
-            <my-footer></my-footer>
+            <my-footer2></my-footer2>
         </div>
     `
     // encapsulation: ViewEncapsulation.Native

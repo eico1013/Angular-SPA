@@ -154,7 +154,7 @@ export class BuecherService {
         // In Angular gibt es dafuer den Service Jsonp.
     }
 
-    /**
+    /*
      * Ein Buch anhand der ID suchen
      * @param id Die ID des gesuchten Buchs
      */

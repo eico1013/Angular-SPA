@@ -30,16 +30,15 @@ import {Component} from '@angular/core';
                 lg:  992 - 1199px ("large")
                 xl: 1200 px       ("extra large")
         -->
+        
         <header class="col-xs-12 jz-app-header">
             <div class="clearfix">
-                <div class="ml-0 col-xs-4">
-                    <my-logo></my-logo>
-                </div>
-                <div class="mr-0 col-xs-8">
-                    <my-login></my-login>
-                    <my-logout></my-logout>
+                <div class="mr-0 col-xs-12">
+                    <my-login2></my-login2>
+                    <my-logout2></my-logout2>
                 </div>
             </div>
+
         </header>
     `,
     styleUrls: ['./layout/header.component.min.css']
