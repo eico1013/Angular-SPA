@@ -36,8 +36,8 @@ export default class CreateKundeGuard implements
             return true;
         }
 
-        createBuch.showWarning = true;
-        createBuch.fertig = true;
+        createKunde.showWarning = true;
+        createKunde.fertig = true;
         console.warn('Beim Verlassen der Seite werden Daten verloren.');
         return false;
     }

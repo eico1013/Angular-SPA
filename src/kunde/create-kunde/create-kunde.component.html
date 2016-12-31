@@ -1,0 +1,111 @@
+<div class="card">
+    <div class="card-header bg-primary">
+        <h4>Neuer Kunde</h4>
+    </div>
+
+    <div class="card-block">
+        <!-- Template-Syntax:
+                [formGroup]="form"  fuer Input = Property Binding
+                                    d.h. formGroup fuer Attr. form
+                (submit)="save()"  fuer Output = Event Binding
+                                   d.h. Ereignis submit an save() anbinden
+                                   oder on-submit="save"
+                Definition von Attributnamen gemaess HTML: Attribute names
+                must consist of one or more characters other than the
+                space characters, U+0000 NULL, """, "'", ">", "/", "=",
+                the control characters, and any characters that are not
+                defined by Unicode.
+                https://github.com/angular/angular/issues/6786
+        -->
+        <!-- dynamisches Formular durch formGroup -->
+        <form [formGroup]="form" role="form">
+            <div class="form-group row has-warning" *ngIf="showWarning">
+                <div class="form-control-feedback">
+                    <i class="fa fa-2x fa-warning"></i>
+                    <strong class="text-help ml-1">
+                        Wenn Sie die Seite jetzt verlassen, verlieren Sie Ihre eingegebenen Daten.
+                    </strong>
+                </div>
+            </div>
+
+            <div class="form-group row"
+                [class.has-danger]="!name.valid && name.touched">
+                <label for="nameInput" class="col-sm-2 form-control-label">
+                    Name *
+                </label>
+                <div class="col-sm-10">
+                    <input id="nameInput"
+                        placeholder="Name"
+                        class="form-control form-control-danger"
+                        autofocus
+                        required
+                        pattern="\w.*"
+                        minlength="2"
+                        formControlName="name">
+                    <div class="fa fa-exclamation-circle form-control-feedback"
+                        *ngIf="!name.valid && name.touched">
+                        Ein Kundenname muss mit einem Buchstaben oder einer
+                        Ziffer beginnen und mindestens 2 Zeichen lang sein.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label">Bewertung</label>
+                <div class="col-sm-10">
+                    <select class="form-control" formControlName="rating">
+                        <option value="">Bewertung ausw&auml;hlen</option>
+                        <optgroup label="Hoch">
+                            <option value="5">5</option>
+                        </optgroup>
+                        <optgroup label="Mittel">
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                        </optgroup>
+                        <optgroup label="Niedrig">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </optgroup>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group row"
+                [class.has-danger]="!email.valid && email.touched">
+                <label for="emailInput" class="col-sm-2 form-control-label">
+                    Email *
+                </label>
+                <div class="col-sm-10">
+                    <input id="emailInput"
+                        placeholder="Email"
+                        class="form-control form-control-danger"
+                        required
+                        minlength="2"
+                        formControlName="email">
+                    <div class="fa fa-exclamation-circle form-control-feedback"
+                        *ngIf="!email.valid && email.touched">
+                        Eine g&uuml;ltige Email-Adresse ist notwendig.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <!-- Template-Syntax:
+                            (click)="onSave()" fuer Output = Event Binding
+                                               d.h. Ereignis click an onSave() anbinden
+                                               oder on-click="onSave"
+                            [disabled]="..." fuer Input = Property Binding
+                    -->
+                    <button class="btn btn-secondary" (click)="onSave()"
+                            [disabled]="!form.valid">
+                        <i class="fa fa-check"></i>
+                        <span class="ml-1">Jetzt anlegen</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <small>* sind Pflichtfelder</small>
+    </div>
+</div>
