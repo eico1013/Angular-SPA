@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 - 2016 Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2016 Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,20 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const SCHEME: string = 'https';
-const PORT: number = 8443;
-const SERVERNAME: string = 'localhost';
-const BASE_PATH: string = '/';
+// "Barrel" gemaess Angular Styleguide:
+//  - mehrere Module aggregieren und diese exportieren
+//  - kuenftig weniger Import-Anweisungen
 
-/**
- * Basis-URI, wenn der eigentliche Server verwendet wird.
- */
-export const BASE_URI: string = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`;
-
-/**
- * Pfad f&uuml;r den Zugriff auf Kunden, ausgehend von der Basis-URI.
- */
-export const PATH_KUNDEN: string = `kunden`;
-
-export const TIMEZONE_OFFSET_MS: number =
-    new Date().getTimezoneOffset() * 60 * 1000;
+export * from './kunde';
+export * from './kunde.validator';
