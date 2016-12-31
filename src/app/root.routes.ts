@@ -21,9 +21,6 @@ import {RouterModule, Routes} from '@angular/router';
 import CreateBuchComponent from '../buecher/create-buch/create-buch.component';
 import CreateBuchGuard from '../buecher/create-buch/create-buch.guard';
 import DetailsBuchComponent from '../buecher/details-buch/details-buch.component';
-import BalkendiagrammComponent from '../buecher/diagramme/balkendiagramm.component';
-import LiniendiagrammComponent from '../buecher/diagramme/liniendiagramm.component';
-import TortendiagrammComponent from '../buecher/diagramme/tortendiagramm.component';
 import SucheBuecherComponent from '../buecher/suche-buecher/suche-buecher.component';
 import UpdateBuchComponent from '../buecher/update-buch/update-buch.component';
 
@@ -52,22 +49,6 @@ const routes: Routes = [
       canActivate: [AdminGuard],
       canDeactivate: [CreateBuchGuard]
     },
-    {
-      path: 'balkendiagramm',
-      component: BalkendiagrammComponent,
-      canActivate: [AdminGuard]
-    },
-    {
-      path: 'liniendiagramm',
-      component: LiniendiagrammComponent,
-      canActivate: [AdminGuard]
-    },
-    {
-      path: 'tortendiagramm',
-      component: TortendiagrammComponent,
-      canActivate: [AdminGuard]
-    }
-
     // Weiterer Pfad fuer die Produktion.
     // In der Entwicklung ist es einfacher, bei FALSCHEN Pfaden die Fehler sehen
     // {path: '**', component: NotFoundComponent}
