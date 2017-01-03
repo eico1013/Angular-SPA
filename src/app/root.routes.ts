@@ -23,12 +23,13 @@ import CreateBuchGuard from '../buecher/create-buch/create-buch.guard';
 import DetailsBuchComponent from '../buecher/details-buch/details-buch.component';
 import SucheBuecherComponent from '../buecher/suche-buecher/suche-buecher.component';
 import UpdateBuchComponent from '../buecher/update-buch/update-buch.component';
-
 import HomeComponent from '../home/home.component';
 import AdminGuard from '../iam/admin.guard';
+import SucheKundenComponent from '../kunden/suche-kunden/suche-kunden.component';
 
 export const HOME_PATH: string = '';
 export const DETAILS_BUCH_PATH: string = 'detailsBuch';
+export const DETAILS_KUNDE_PATH: string = 'detailsKunde';
 
 // https://angular.io/docs/ts/latest/guide/router.html
 /**
@@ -37,8 +38,15 @@ export const DETAILS_BUCH_PATH: string = 'detailsBuch';
 const routes: Routes = [
     {path: HOME_PATH, component: HomeComponent},
     {path: 'sucheBuecher', component: SucheBuecherComponent},
+    {path: 'sucheKunden', component: SucheKundenComponent},
     // id als Pfad-Parameter
     {path: `${DETAILS_BUCH_PATH}/:id`, component: DetailsBuchComponent}, {
+        path: 'updateBuch/:id',
+        component: UpdateBuchComponent,
+        canActivate: [AdminGuard]
+    },
+    // id als Pfad-Parameter
+    {path: `${DETAILS_KUNDE_PATH}/:id`, component: DetailsBuchComponent}, {
         path: 'updateBuch/:id',
         component: UpdateBuchComponent,
         canActivate: [AdminGuard]

@@ -15,20 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+const USER: string = 'admin';
+const PASSWORD: string = 'p';
+const AT: string = '@';
+
 const SCHEME: string = 'https';
+const SCHEME2: string = 'http';
 const PORT: number = 8443;
+const PORT2: number = 8081;
 const SERVERNAME: string = 'localhost';
 const BASE_PATH: string = '/';
 
+
+
 /**
  * Basis-URI, wenn der eigentliche Server verwendet wird.
+ * http://admin:p@localhost….
  */
+export const BASE_URI2: string =
+    `${SCHEME2}://${USER}:${PASSWORD}${AT}${SERVERNAME}:${PORT2}${BASE_PATH}`;
+
 export const BASE_URI: string = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`;
 
 /**
  * Pfad f&uuml;r den Zugriff auf Kunden, ausgehend von der Basis-URI.
  */
 export const PATH_KUNDEN: string = `kunden`;
+
+/**
+ * Pfad f&uuml;r den Zugriff auf Kunden, ausgehend von der Basis-URI.
+ */
+// export const PATH_KUNDEN: string = `kunden`;
+export const PATH_KUNDEN: string = `kunden/v1`;
 
 export const TIMEZONE_OFFSET_MS: number =
     new Date().getTimezoneOffset() * 60 * 1000;

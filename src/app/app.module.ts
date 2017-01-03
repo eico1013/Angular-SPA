@@ -21,11 +21,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import BuecherModule from '../buecher/buecher.module';
 import HomeModule from '../home/home.module';
 import {IAM_PROVIDERS} from '../iam/iam.module';
+import KundenModule from '../kunden/kunden.module';
 import LayoutModule from '../layout/layout.module';
 import SharedModule from '../shared/shared.module';
 
 import AppComponent from './app.component';
 import ROOT_ROUTES from './root.routes';
+
 
 // https://angular.io/docs/ts/latest/guide/ngmodule.html
 // https://angular.io/docs/ts/latest/cookbook/ngmodule-faq.html
@@ -39,8 +41,8 @@ import ROOT_ROUTES from './root.routes';
     // Ein Modul muss die Module importieren, von denen es Funktionalitaet nutzt
     imports: [
         // Nur das Root Modul importiert BrowserModule
-        BrowserModule, SharedModule, HomeModule, BuecherModule, LayoutModule,
-        IAM_PROVIDERS, ROOT_ROUTES
+        BrowserModule, SharedModule, HomeModule, BuecherModule, KundenModule,
+        LayoutModule, IAM_PROVIDERS, ROOT_ROUTES
     ],
 
     // Eigene Komponenten des Moduls
