@@ -40,7 +40,7 @@ export const BASE_URI: string = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`;
 /**
  * Pfad f&uuml;r den Zugriff auf Kunden, ausgehend von der Basis-URI.
  */
-export const PATH_KUNDEN: string = `kunden`;
+// export const PATH_KUNDEN: string = `kunden`;
 
 /**
  * Pfad f&uuml;r den Zugriff auf Kunden, ausgehend von der Basis-URI.
