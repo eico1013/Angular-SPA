@@ -54,9 +54,8 @@ export default class CreateKundeComponent implements OnInit {
     fertig: boolean = false;
 
     constructor(
-        private formBuilder: FormBuilder,
-        private kundenService: KundenService, private router: Router,
-        private nameService: Name) {
+        private formBuilder: FormBuilder, private kundenService: KundenService,
+        private router: Router, private nameService: Name) {
         console.log('CreateKundeComponent.constructor()');
         if (isPresent(router)) {
             console.log('Injizierter Router:', router);
@@ -102,17 +101,17 @@ export default class CreateKundeComponent implements OnInit {
         const neuerKunde: Kunde = Kunde.fromForm(this.form.value);
         console.log('neuerKunde=', neuerKunde);
 
-        const successFn: (location: string|undefined) => void =
-            (location = undefined) => {
-                console.log(
-                    `CreateKunde.onSave(): successFn(): location: ${location}`);
-                // TODO Das Response-Objekt enthaelt im Header NICHT "Location"
-                console.log(
-                    `CreateKunde.onSave(): successFn(): navigate: ${HOME_PATH}`);
-                this.fertig = true;
-                this.showWarning = false;
-                this.router.navigate([HOME_PATH]);
-            };
+        const successFn: (
+            location: string|undefined) => void = (location = undefined) => {
+            console.log(
+                `CreateKunde.onSave(): successFn(): location: ${location}`);
+            // TODO Das Response-Objekt enthaelt im Header NICHT "Location"
+            console.log(
+                `CreateKunde.onSave(): successFn(): navigate: ${HOME_PATH}`);
+            this.fertig = true;
+            this.showWarning = false;
+            this.router.navigate([HOME_PATH]);
+        };
         const errorFn: (
             status: number,
             text: string|undefined) => void = (status, text = undefined) => {

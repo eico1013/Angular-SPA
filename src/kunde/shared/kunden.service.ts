@@ -73,8 +73,7 @@ export class KundenService {
         @Inject(IamService) private readonly iamService: IamService) {
         this.baseUriKunden = `${BASE_URI}${PATH_KUNDEN}`;
         console.log(
-            'KundenService.constructor(): baseUriKunden='
-            + this.baseUriKunden);
+            'KundenService.constructor(): baseUriKunden=' + this.baseUriKunden);
     }
 
     /**
@@ -426,7 +425,8 @@ export class KundenService {
     }
 
     toString(): String {
-        return `KundenService: {kunde: ${JSON.stringify(this._kunde, null, 2)}}`;
+        return `KundenService: {kunde: ${JSON.stringify(
+            this._kunde, null, 2)}}`;
     }
 
     /**
