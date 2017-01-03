@@ -21,14 +21,14 @@
 // Moment exportiert den Namespace moment und die gleichnamige Function:
 //
 // http://stackoverflow.com/questions/35254524/using-moment-js-in-angular-2-typescript-application#answer-35255412
-// import * as moment_ from 'moment';
-// import {Moment} from 'moment';
+import * as moment_ from 'moment';
+import {Moment} from 'moment';
 
-import {/*isBlank, isEmpty,*/ isPresent} from '../../shared';
+import {isBlank, /*isEmpty, */ isPresent} from '../../shared';
 
 // const MIN_RATING: number = 0;
 // const MAX_RATING: number = 5;
-// const moment: (date: string) => Moment = (<any>moment_)['default'];
+const moment: (date: string) => Moment = (<any>moment_)['default'];
 
 // declare type Verlag = 'IWI_VERLAG' | 'HSKA_VERLAG';
 // declare type BuchArt = 'KINDLE' | 'DRUCKAUSGABE';
@@ -43,10 +43,11 @@ export interface KundeShared {
     email: string|undefined;
     newsletter: boolean|undefined;
     geburtsdatum: string|undefined;
-    // umsatz?: Umsatz;
+    umsatz?: Object;
     homepage: string|undefined;
     geschlecht: string|undefined;
     username: string|undefined;
+    interessen?: Array<string>|undefined;
 }
 
 /**
@@ -81,7 +82,7 @@ export interface KundeForm extends KundeShared {
  * Functions fuer Abfragen und Aenderungen.
  */
 export class Kunde {
-    public ratingArray: Array<boolean> = [];
+    // public ratingArray: Array<boolean> = [];
 
     /**
      * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem RESTful Web
@@ -90,15 +91,15 @@ export class Kunde {
      * @return Das initialisierte Buch-Objekt
      */
     static fromServer(kundeServer: KundeServer): Kunde {
-        // let datum: moment_.Moment|undefined = undefined;
-        // if (isPresent(kundeServer.datum)) {
-        //     const tmp: string = kundeServer.datum as string;
-        //     datum = moment(tmp);
-        // }
+        let geburtsdatum: moment_.Moment|undefined = undefined;
+        if (isPresent(kundeServer.geburtsdatum)) {
+            const tmp: string = kundeServer.geburtsdatum as string;
+            geburtsdatum = moment(tmp);
+        }
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
-            kundeServer.newsletter, kundeServer.geburtsdatum,
-            kundeServer.homepage, kundeServer.geschlecht, kundeServer.username);
+            kundeServer.newsletter, geburtsdatum, kundeServer.homepage,
+            kundeServer.geschlecht, kundeServer.username);
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
@@ -220,33 +221,30 @@ export class Kunde {
     //     this.rabatt = rabatt;
     // }
 
-    // /**
-    //  * Abfrage, ob es zum Buch auch Schlagw&ouml;rter gibt.
-    //  * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
-    //  */
-    // hasSchlagwoerter(): boolean {
-    //     if (isBlank(this.schlagwoerter)) {
-    //         return false;
-    //     }
-    //     const tmpSchlagwoerter: Array<string> =
-    //         this.schlagwoerter as Array<string>;
-    //     return tmpSchlagwoerter.length !== 0;
-    // }
+    /**
+     * Abfrage, ob es zum Buch auch Schlagw&ouml;rter gibt.
+     * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
+     */
+    hasInteressen(): boolean {
+        if (isBlank(this.interessen)) {
+            return false;
+        }
+        const tmpInteressen: Array<string> = this.interessen as Array<string>;
+        return tmpInteressen.length !== 0;
+    }
 
-    // /**
-    //  * Abfrage, ob es zum Buch das angegebene Schlagwort gibt.
-    //  * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
-    //  * @return true, falls es das Schlagwort gibt. Sonst false.
-    //  */
-    // hasSchlagwort(schlagwort: string): boolean {
-    //     if (isBlank(this.schlagwoerter)) {
-    //         return false;
-    //     }
-    //     const tmpSchlagwoerter: Array<string> =
-    //         this.schlagwoerter as Array<string>;
-    //     return tmpSchlagwoerter.find((s: string) => s === schlagwort)
-    //         !== undefined;
-    // }
+    /**
+     * Abfrage, ob es zum Buch das angegebene Schlagwort gibt.
+     * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
+     * @return true, falls es das Schlagwort gibt. Sonst false.
+     */
+    hasInteresse(interesse: string): boolean {
+        if (isBlank(this.interessen)) {
+            return false;
+        }
+        const tmpInteressen: Array<string> = this.interessen as Array<string>;
+        return tmpInteressen.find((s: string) => s === interesse) !== undefined;
+    }
 
     // /**
     //  * Aktualisierung der Schlagw&ouml;rter des Buch-Objekts.
@@ -269,18 +267,19 @@ export class Kunde {
      * @return Das JSON-Objekt f&uuml;r den RESTful Web Service
      */
     toJSON(): KundeServer {
-        // const datum: string|undefined = this.datum === undefined ?
-        //     undefined :
-        //     this.datum.format('YYYY-MM-DD');
+        const geburtsdatum: string|undefined = this.geburtsdatum === undefined ?
+            undefined :
+            this.geburtsdatum.format('YYYY-MM-DD');
         return {
             _id: this._id,
             nachname: this.nachname,
             email: this.email,
             newsletter: this.newsletter,
-            geburtsdatum: this.geburtsdatum,
+            geburtsdatum: geburtsdatum,
             homepage: this.homepage,
             geschlecht: this.geschlecht,
-            username: this.username
+            username: this.username,
+            interessen: this.interessen
         };
     }
 
@@ -293,37 +292,39 @@ export class Kunde {
 
         public _id: string|undefined, public nachname: string|undefined,
         public email: string|undefined, public newsletter: boolean|undefined,
-        public geburtsdatum: string|undefined, /*public umsatz: Umsatz,*/
+        public geburtsdatum: Moment|undefined, /*public umsatz: Umsatz,*/
         public homepage: string|undefined, public geschlecht: string|undefined,
-        public username: string|undefined) {
-        this._id = _id || undefined;
-        this.nachname = nachname;
+        public username: string|undefined,
+        public interessen?: Array<string>|undefined) {
+        this._id = _id;
+        this.nachname = nachname || undefined;
         this.email = email || undefined;
         this.newsletter = newsletter || undefined;
-        this.geburtsdatum = geburtsdatum || undefined;
+        this.geburtsdatum = isPresent(geburtsdatum) ?
+            geburtsdatum :
+            moment(new Date().toISOString());
 
-        // if (isBlank(schlagwoerter)) {
-        //     this.schlagwoerter = [];
-        // } else {
-        //     const tmpSchlagwoerter: Array<string> =
-        //         schlagwoerter as Array<string>;
-        //     this.schlagwoerter = tmpSchlagwoerter;
-        // }
+        if (isBlank(interessen)) {
+            this.interessen = [];
+        } else {
+            const tmpinteressen: Array<string> = interessen as Array<string>;
+            this.interessen = tmpinteressen;
+        }
         // _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
         // _.times(MAX_RATING - rating, () => this.ratingArray.push(false));
         // this.email = email || undefined;
     }
 
-    // private resetSchlagwoerter(): void {
-    //     this.schlagwoerter = [];
+    // private resetInteressen(): void {
+    //     this.interessen = [];
     // }
 
-    // private addSchlagwort(schlagwort: string): void {
-    //     if (isBlank(this.schlagwoerter)) {
-    //         this.schlagwoerter = [];
+    // private addInteresse(interesse: string): void {
+    //     if (isBlank(this.interessen)) {
+    //         this.interessen = [];
     //     }
-    //     const tmpSchlagwoerter: Array<string> =
-    //         this.schlagwoerter as Array<string>;
-    //     tmpSchlagwoerter.push(schlagwort);
+    //     const tmpInteressen: Array<string> =
+    //         this.interessen as Array<string>;
+    //     tmpInteressen.push(interesse);
     // }
 }

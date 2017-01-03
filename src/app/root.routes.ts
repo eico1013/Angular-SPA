@@ -28,6 +28,7 @@ import SucheBuecherComponent from '../buecher/suche-buecher/suche-buecher.compon
 import UpdateBuchComponent from '../buecher/update-buch/update-buch.component';
 import HomeComponent from '../home/home.component';
 import AdminGuard from '../iam/admin.guard';
+import DetailsKundeComponent from '../kunden/details-kunden/details-kunde.component';
 import SucheKundenComponent from '../kunden/suche-kunden/suche-kunden.component';
 
 export const HOME_PATH: string = '';
@@ -49,8 +50,8 @@ const routes: Routes = [
         canActivate: [AdminGuard]
     },
     // id als Pfad-Parameter
-    {path: `${DETAILS_KUNDE_PATH}/:id`, component: DetailsBuchComponent}, {
-        path: 'updateBuch/:id',
+    {path: `${DETAILS_KUNDE_PATH}/:id`, component: DetailsKundeComponent}, {
+        path: 'updateKunde/:id',
         component: UpdateBuchComponent,
         canActivate: [AdminGuard]
     },
