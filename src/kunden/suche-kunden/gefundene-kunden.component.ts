@@ -35,7 +35,7 @@ import {KundenService} from '../shared/kunden.service';
     template: `
         <!-- Template Binding durch die Direktive ngIf -->
         <!-- Eine Direktive ist eine Komponente ohne View -->
-        <div class="card" *ngIf="buecher !== null">
+        <div class="card" *ngIf="kunden !== null">
             <div class="card-header">
                 <h4><i class="fa fa-folder-open-o"></i> Gefundene
                 Kunden</h4>
@@ -65,11 +65,11 @@ import {KundenService} from '../shared/kunden.service';
                         <!-- Template Binding: ngFor -->
                         <!-- Event-Binding: statt (click) auch on-click -->
                         <!-- Animation flyInOut siehe unten -->
-                        <tr *ngFor="let b of buecher; let i = index"
+                        <tr *ngFor="let k of kunden; let i = index"
                             (click)="onSelect(b)" [@rowOut]="'in'">
                             <td>{{i + 1}}</td>
-                            <td>{{b._id}}</td>
-                            <td>{{b.nachname}}</td>
+                            <td>{{k._id}}</td>
+                            <td>{{k.nachname}}</td>
           <!--                  <td>
                                 <span [ngSwitch]="b.verlag">
                                     <span *ngSwitchCase="'IWI_VERLAG'">
@@ -100,7 +100,7 @@ import {KundenService} from '../shared/kunden.service';
                                 <!--
                                 http://v4-alpha.getbootstrap.com/components/modal
                                 -->
-                                <a [routerLink]="['/detailsBuch', b._id]"
+                                <a [routerLink]="['/detailsBuch', k._id]"
                                    data-toggle="tooltip"
                                    title="Details anzeigen">
                                     <i class="fa fa-search-plus"></i>
@@ -128,13 +128,13 @@ import {KundenService} from '../shared/kunden.service';
                     </template>
                     <template ngPluralCase="other">
                         <i class="fa fa-info-circle"></i>
-                        Es gibt {{kunden.length}} B&uuml;cher
+                        Es gibt {{kunden.length}} Kunden
                     </template>
                 </div>
 
                 <i class="fa fa-info-circle"></i>
                 Zur Anzeige der JSON-Datens&auml;tze in
-                gefundene-buecher.component.ts den Kommentar beim Tag
+                gefundene-kunden.component.ts den Kommentar beim Tag
                 &lt;pre&gt; entfernen
             </div>
         </div>
@@ -142,7 +142,7 @@ import {KundenService} from '../shared/kunden.service';
         <!-- Ausgabe des JSON-Datensatzes im Webbrowser statt
         console.log(...) -->
         <!--
-        <pre *ngIf="buecher !== null">{{buecher | json}}</pre>
+        <pre *ngIf="kunden !== null">{{kunden | json}}</pre>
         -->
     `,
     // https://angular.io/docs/ts/latest/guide/animations.html

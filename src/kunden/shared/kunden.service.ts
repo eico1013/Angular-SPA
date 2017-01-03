@@ -117,6 +117,10 @@ export class KundenService {
         const uri: string = this.baseUriKunden;
         console.log(`KundenService.find(): uri=${uri}`);
 
+        // const headers: Headers =
+        //     new Headers({'Content-Access-Control-Allow-Origin': '*'});
+        // console.log(headers);
+
         const nextFn: (response: Response) => void = (response) => {
             console.log('KundenService.find(): nextFn()');
             let kunden: Array<Kunde> = this.responseToArrayKunde(response);
@@ -145,7 +149,9 @@ export class KundenService {
         // https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/subscribe.md
         // http://stackoverflow.com/questions/34533197/what-is-the-difference-between-rx-observable-subscribe-and-foreach
         // https://xgrommx.github.io/rx-book/content/observable/observable_instance_methods/subscribe.html
+        console.log(`uri: ${uri}`);
         this.http.get(uri, {search: searchParams}).subscribe(nextFn, errorFn);
+        console.log(`uri: ${uri}`);
 
         // Same-Origin-Policy verhindert Ajax-Datenabfragen an einen Server in
         // einer anderen Domain. JSONP (= JSON mit Padding) ermoeglicht die

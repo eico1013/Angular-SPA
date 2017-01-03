@@ -138,7 +138,7 @@ import {KundenService} from '../shared/kunden.service';
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                             <i class="fa fa-info-circle"></i>
-                            Hinweis: Keine Eingabe liefert alle B&uuml;cher
+                            Hinweis: Keine Eingabe liefert alle Kunden.
                         </div>
                     </div> 
 
