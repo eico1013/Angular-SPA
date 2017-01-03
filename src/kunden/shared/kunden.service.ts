@@ -234,41 +234,40 @@ export class KundenService {
     //     this.http.post(uri, body, options).subscribe(nextFn, errorFnPost);
     // }
 
-    // /**
-    //  * Ein vorhandenes Buch aktualisieren
-    //  * @param buch Das JSON-Objekt mit den aktualisierten Buchdaten
-    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
-    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
-    //  */
-    // @log
-    // update(
-    //     buch: Buch, successFn: () => void,
-    //     errorFn: (status: number, text: string) => void|undefined): void {
-    //     const uri: string = `${this.baseUriBuecher}`;
-    //     const body: string = JSON.stringify(buch.toJSON());
-    //     console.log('body=', body);
+    /**
+     * Ein vorhandenes Buch aktualisieren
+     * @param buch Das JSON-Objekt mit den aktualisierten Buchdaten
+     * @param successFn Die Callback-Function fuer den Erfolgsfall
+     * @param errorFn Die Callback-Function fuer den Fehlerfall
+     */
+    @log
+    update(
+        kunde: Kunde, successFn: () => void,
+        errorFn: (status: number, text: string) => void|undefined): void {
+        const uri: string = `${this.baseUriKunden}`;
+        const body: string = JSON.stringify(kunde.toJSON());
+        console.log('body=', body);
 
-    //     const headers: Headers =
-    //         new Headers({'Content-Type': 'application/json'});
-    //     const authorization: string|undefined =
-    //         this.iamService.getAuthorization();
-    //     if (isPresent(authorization)) {
-    //         headers.append('Authorization', authorization as string);
-    //     }
-    //     const options: RequestOptionsArgs = {headers: headers};
-    //     console.log('options=', options);
+        const headers: Headers =
+            new Headers({'Content-Type': 'application/json'});
+        const authorization: string|undefined =
+            this.iamService.getAuthorization();
+        if (isPresent(authorization)) {
+            headers.append('Authorization', authorization as string);
+        }
+        const options: RequestOptionsArgs = {headers: headers};
+        console.log('options=', options);
 
-    //     const nextFn: ((response: Response) => void) = (response) =>
-    //         successFn();
-    //     const errorFnPut: ((errResponse: Response) => void) = (errResponse)
-    //     => {
-    //         if (isPresent(errorFn)) {
-    //             errorFn(errResponse.status, errResponse.text());
-    //         }
-    //     };
+        const nextFn: ((response: Response) => void) = (response) =>
+            successFn();
+        const errorFnPut: ((errResponse: Response) => void) = (errResponse) => {
+            if (isPresent(errorFn)) {
+                errorFn(errResponse.status, errResponse.text());
+            }
+        };
 
-    //     this.http.put(uri, body, options).subscribe(nextFn, errorFnPut);
-    // }
+        this.http.put(uri, body, options).subscribe(nextFn, errorFnPut);
+    }
 
     /**
      * Ein Buch l&ouml;schen
