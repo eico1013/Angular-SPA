@@ -24,7 +24,7 @@
 // import * as moment_ from 'moment';
 // import {Moment} from 'moment';
 
-import {isBlank, /* isEmpty,*/isPresent} from '../../shared';
+import {isBlank, /* isEmpty,*/ isPresent} from '../../shared';
 
 // const MIN_RATING: number = 0;
 // const MAX_RATING: number = 5;
@@ -98,7 +98,8 @@ export class Kunde {
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
             kundeServer.newsletter, kundeServer.geburtsdatum,
-            kundeServer.homepage, kundeServer.geschlecht, kundeServer.schlagwoerter, kundeServer.username);
+            kundeServer.homepage, kundeServer.geschlecht,
+            kundeServer.schlagwoerter, kundeServer.username);
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
@@ -107,7 +108,7 @@ export class Kunde {
 
     /**
      * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular
-     kommen.
+     * kommen.
      * @param buch JSON-Objekt mit Daten vom Formular
      * @return Das initialisierte Buch-Objekt
      */
@@ -121,9 +122,9 @@ export class Kunde {
         }
 
         const kunde: Kunde = new Kunde(
-            kundeForm._id, kundeForm.nachname, kundeForm.email, kundeForm.newsletter,
-            kundeForm.geburtsdatum, kundeForm.homepage, kundeForm.geschlecht,
-            schlagwoerter, kundeForm.username);
+            kundeForm._id, kundeForm.nachname, kundeForm.email,
+            kundeForm.newsletter, kundeForm.geburtsdatum, kundeForm.homepage,
+            kundeForm.geschlecht, schlagwoerter, kundeForm.username);
         console.log('Kunde.fromForm(): kunde=', kunde);
         return kunde;
     }
@@ -291,7 +292,8 @@ export class Kunde {
         public email: string|undefined, public newsletter: boolean|undefined,
         public geburtsdatum: string|undefined, /*public umsatz: Umsatz,*/
         public homepage: string|undefined, public geschlecht: string|undefined,
-        public schlagwoerter: Array<string>|undefined, public username: string|undefined) {
+        public schlagwoerter: Array<string>|undefined,
+        public username: string|undefined) {
         this._id = _id || undefined;
         this.nachname = nachname;
         this.email = email || undefined;
