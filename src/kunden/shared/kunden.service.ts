@@ -117,10 +117,6 @@ export class KundenService {
         const uri: string = this.baseUriKunden;
         console.log(`KundenService.find(): uri=${uri}`);
 
-        // const headers: Headers =
-        //     new Headers({'Content-Access-Control-Allow-Origin': '*'});
-        // console.log(headers);
-
         const nextFn: (response: Response) => void = (response) => {
             console.log('KundenService.find(): nextFn()');
             let kunden: Array<Kunde> = this.responseToArrayKunde(response);

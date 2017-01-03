@@ -46,45 +46,44 @@ import {KundenService} from '../shared/kunden.service';
         <section class="mt-2" *ngIf="kunde !== null">
             <h4>Kunde {{kunde._id}}:</h4>
 
-            <!-- http://v4-alpha.getbootstrap.com/components/navs/#tabs 
+            <!-- http://v4-alpha.getbootstrap.com/components/navs/#tabs -->
             <ul class="nav nav-tabs mt-2">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#stammdaten"
+                <--! <li class="nav-item">
+                    <a class="nav-link active" href="#interessen"
                        data-toggle="tab">
-                        Stammdaten
+                        Interessen
                     </a>
-                </li>
-                <li class="nav-item" *ngIf="buch.hasSchlagwoerter()">
-                    <a class="nav-link" href="#schlagwoerter"
+                </li> -->
+                <li class="nav-item" *ngIf="buch.hasInteressen()">
+                    <a class="nav-link" href="#interessen"
                        data-toggle="tab">
-                        Schlagw&ouml;rter
+                        Interessen
                     </a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane fade in active" id="stammdaten">
+                <--! <div class="tab-pane fade in active" id="interessen">
                     <div class="mt-1">
-                        <my-details-stammdaten [buch]="buch">
-                        </my-details-stammdaten>
+                       
                     </div>
-                </div>
-                <div class="tab-pane fade" id="schlagwoerter"
-                    *ngIf="buch.hasSchlagwoerter()">
+                </div> -->
+                <div class="tab-pane fade" id="interessen"
+                    *ngIf="buch.hasInteressen()">
                     <div class="mt-1">
-                        <my-details-schlagwoerter [values]="buch.schlagwoerter">
-                        </my-details-schlagwoerter>
+                        <my-details-interessen [values]="kunde.interessen">
+                        </my-details-interessen>
                     </div>
                 </div>
             </div>
 
             <div>
-                <a [routerLink]="['/updateBuch', buch._id]"
+                <a [routerLink]="['/updateKunde', kunde._id]"
                    data-toggle="tooltip" title="Bearbeiten" class="ml-1"
                    *ngIf="isAdmin">
                    <i class="fa fa-2x fa-edit"></i>
                 </a>
-            </div> -->
+            </div> 
         </section>
 
         <my-error-message [text]="errorMsg"></my-error-message>

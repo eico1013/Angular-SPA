@@ -24,8 +24,9 @@ import SharedModule from '../shared/shared.module';
 // import CreateBuchComponent from './create-buch/create-buch.component';
 // import CreateBuchGuard from './create-buch/create-buch.guard';
 // import DetailsBuchComponent from './details-buch/details-buch.component';
-// import DetailsSchlagwoerterComponent from
-// './details-buch/details-schlagwoerter.component';
+import DetailsKundeComponent from './details-kunden/details-kunde.component';
+import DetailsInteressenComponent from
+'./details-kunden/details-interessen.component';
 // import DetailsStammdatenComponent from
 // './details-buch/details-stammdaten.component';
 // import BalkendiagrammComponent from './diagramme/balkendiagramm.component';
@@ -48,14 +49,14 @@ import SuchkriterienComponent from './suche-kunden/suchkriterien.component';
 // './update-buch/update-stammdaten.component';
 
 const komponentenExport: Array<Type<any>> = [
-    /*CreateBuchComponent, DetailsBuchComponent, BalkendiagrammComponent,
+    /*CreateBuchComponent,*/ DetailsKundeComponent, /* BalkendiagrammComponent,
     LiniendiagrammComponent, TortendiagrammComponent, */
-    SucheKundenComponent /*,
-UpdateBuchComponent*/
+    SucheKundenComponent                            /*,
+                           UpdateBuchComponent*/
 ];
 
 const komponentenIntern: Array<Type<any>> = [
-    /*DetailsSchlagwoerterComponent, DetailsStammdatenComponent,*/
+    DetailsInteressenComponent, /*DetailsStammdatenComponent,*/
     GefundeneKundenComponent, SucheKundenComponent, SuchergebnisComponent,
     SuchkriterienComponent /*, UpdateSchlagwoerterComponent,
      UpdateStammdatenComponent*/
