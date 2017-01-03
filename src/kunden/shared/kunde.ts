@@ -61,7 +61,7 @@ export interface KundeShared {
  */
 export interface KundeServer extends KundeShared {
     // rating: number|undefined;
-    // schlagwoerter?: Array<string>|undefined;
+    interessen?: Array<string>|undefined;
 }
 
 /**
@@ -99,7 +99,8 @@ export class Kunde {
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
             kundeServer.newsletter, geburtsdatum, kundeServer.homepage,
-            kundeServer.geschlecht, kundeServer.username);
+            kundeServer.geschlecht, kundeServer.username,
+            kundeServer.interessen);
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
@@ -296,7 +297,7 @@ export class Kunde {
         public homepage: string|undefined, public geschlecht: string|undefined,
         public username: string|undefined,
         public interessen?: Array<string>|undefined) {
-        this._id = _id;
+        this._id = _id || undefined;
         this.nachname = nachname || undefined;
         this.email = email || undefined;
         this.newsletter = newsletter || undefined;
