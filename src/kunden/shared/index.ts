@@ -20,4 +20,4 @@
 //  - kuenftig weniger Import-Anweisungen
 
 export * from './kunde';
-// export * from './kunde.validator';
+export * from './kunde.validator';
