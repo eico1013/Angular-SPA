@@ -24,7 +24,7 @@
 // import * as moment_ from 'moment';
 // import {Moment} from 'moment';
 
-import {/*isBlank, isEmpty,*/ isPresent} from '../../shared';
+import {isBlank, /* isEmpty,*/isPresent} from '../../shared';
 
 // const MIN_RATING: number = 0;
 // const MAX_RATING: number = 5;
@@ -60,7 +60,7 @@ export interface KundeShared {
  */
 export interface KundeServer extends KundeShared {
     // rating: number|undefined;
-    // schlagwoerter?: Array<string>|undefined;
+    schlagwoerter?: Array<string>|undefined;
 }
 
 /**
@@ -72,8 +72,8 @@ export interface KundeServer extends KundeShared {
  */
 export interface KundeForm extends KundeShared {
     // rating: string;
-    // javascript?: boolean;
-    // typescript?: boolean;
+    javascript?: boolean;
+    typescript?: boolean;
 }
 
 /**
@@ -98,40 +98,35 @@ export class Kunde {
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
             kundeServer.newsletter, kundeServer.geburtsdatum,
-            kundeServer.homepage, kundeServer.geschlecht, kundeServer.username);
+            kundeServer.homepage, kundeServer.geschlecht, kundeServer.schlagwoerter, kundeServer.username);
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
 
 
 
-    // /**
-    //  * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular
-    //  kommen.
-    //  * @param buch JSON-Objekt mit Daten vom Formular
-    //  * @return Das initialisierte Buch-Objekt
-    //  */
-    // static fromForm(buchForm: BuchForm): Buch {
-    //     const schlagwoerter: Array<string> = [];
-    //     if (buchForm.javascript) {
-    //         schlagwoerter.push('JAVASCRIPT');
-    //     }
-    //     if (buchForm.typescript) {
-    //         schlagwoerter.push('TYPESCRIPT');
-    //     }
+    /**
+     * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular
+     kommen.
+     * @param buch JSON-Objekt mit Daten vom Formular
+     * @return Das initialisierte Buch-Objekt
+     */
+    static fromForm(kundeForm: KundeForm): Kunde {
+        const schlagwoerter: Array<string> = [];
+        if (kundeForm.javascript) {
+            schlagwoerter.push('JAVASCRIPT');
+        }
+        if (kundeForm.typescript) {
+            schlagwoerter.push('TYPESCRIPT');
+        }
 
-    //     const datumMoment: Moment|undefined = isEmpty(buchForm.datum) ?
-    //         undefined :
-    //         moment(buchForm.datum as string);
-
-    //     const buch: Buch = new Buch(
-    //         buchForm._id, buchForm.titel, +buchForm.rating, buchForm.art,
-    //         buchForm.verlag, datumMoment, buchForm.preis, buchForm.rabatt /
-    //         100,
-    //         buchForm.lieferbar, schlagwoerter, buchForm.email);
-    //     console.log('Buch.fromForm(): buch=', buch);
-    //     return buch;
-    // }
+        const kunde: Kunde = new Kunde(
+            kundeForm._id, kundeForm.nachname, kundeForm.email, kundeForm.newsletter,
+            kundeForm.geburtsdatum, kundeForm.homepage, kundeForm.geschlecht,
+            schlagwoerter, kundeForm.username);
+        console.log('Kunde.fromForm(): kunde=', kunde);
+        return kunde;
+    }
 
     // // http://momentjs.com
     // get datumFormatted(): string|undefined {
@@ -220,48 +215,48 @@ export class Kunde {
     //     this.rabatt = rabatt;
     // }
 
-    // /**
-    //  * Abfrage, ob es zum Buch auch Schlagw&ouml;rter gibt.
-    //  * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
-    //  */
-    // hasSchlagwoerter(): boolean {
-    //     if (isBlank(this.schlagwoerter)) {
-    //         return false;
-    //     }
-    //     const tmpSchlagwoerter: Array<string> =
-    //         this.schlagwoerter as Array<string>;
-    //     return tmpSchlagwoerter.length !== 0;
-    // }
+    /**
+     * Abfrage, ob es zum Buch auch Schlagw&ouml;rter gibt.
+     * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
+     */
+    hasInteressen(): boolean {
+        if (isBlank(this.schlagwoerter)) {
+            return false;
+        }
+        const tmpSchlagwoerter: Array<string> =
+            this.schlagwoerter as Array<string>;
+        return tmpSchlagwoerter.length !== 0;
+    }
 
-    // /**
-    //  * Abfrage, ob es zum Buch das angegebene Schlagwort gibt.
-    //  * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
-    //  * @return true, falls es das Schlagwort gibt. Sonst false.
-    //  */
-    // hasSchlagwort(schlagwort: string): boolean {
-    //     if (isBlank(this.schlagwoerter)) {
-    //         return false;
-    //     }
-    //     const tmpSchlagwoerter: Array<string> =
-    //         this.schlagwoerter as Array<string>;
-    //     return tmpSchlagwoerter.find((s: string) => s === schlagwort)
-    //         !== undefined;
-    // }
+    /**
+     * Abfrage, ob es zum Buch das angegebene Schlagwort gibt.
+     * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
+     * @return true, falls es das Schlagwort gibt. Sonst false.
+     */
+    hasInteresse(schlagwort: string): boolean {
+        if (isBlank(this.schlagwoerter)) {
+            return false;
+        }
+        const tmpSchlagwoerter: Array<string> =
+            this.schlagwoerter as Array<string>;
+        return tmpSchlagwoerter.find((s: string) => s === schlagwort)
+            !== undefined;
+    }
 
-    // /**
-    //  * Aktualisierung der Schlagw&ouml;rter des Buch-Objekts.
-    //  * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
-    //  * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
-    //  */
-    // updateSchlagwoerter(javascript: boolean, typescript: boolean): void {
-    //     this.resetSchlagwoerter();
-    //     if (javascript) {
-    //         this.addSchlagwort('JAVASCRIPT');
-    //     }
-    //     if (typescript) {
-    //         this.addSchlagwort('TYPESCRIPT');
-    //     }
-    // }
+    /**
+     * Aktualisierung der Schlagw&ouml;rter des Buch-Objekts.
+     * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
+     * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
+     */
+    updateInteressen(javascript: boolean, typescript: boolean): void {
+        this.resetSchlagwoerter();
+        if (javascript) {
+            this.addSchlagwort('JAVASCRIPT');
+        }
+        if (typescript) {
+            this.addSchlagwort('TYPESCRIPT');
+        }
+    }
 
     /**
      * Konvertierung des Kundenobjektes in ein JSON-Objekt f&uuml;r den RESTful
@@ -280,6 +275,7 @@ export class Kunde {
             geburtsdatum: this.geburtsdatum,
             homepage: this.homepage,
             geschlecht: this.geschlecht,
+            schlagwoerter: this.schlagwoerter,
             username: this.username
         };
     }
@@ -295,35 +291,35 @@ export class Kunde {
         public email: string|undefined, public newsletter: boolean|undefined,
         public geburtsdatum: string|undefined, /*public umsatz: Umsatz,*/
         public homepage: string|undefined, public geschlecht: string|undefined,
-        public username: string|undefined) {
+        public schlagwoerter: Array<string>|undefined, public username: string|undefined) {
         this._id = _id || undefined;
         this.nachname = nachname;
         this.email = email || undefined;
         this.newsletter = newsletter || undefined;
         this.geburtsdatum = geburtsdatum || undefined;
 
-        // if (isBlank(schlagwoerter)) {
-        //     this.schlagwoerter = [];
-        // } else {
-        //     const tmpSchlagwoerter: Array<string> =
-        //         schlagwoerter as Array<string>;
-        //     this.schlagwoerter = tmpSchlagwoerter;
-        // }
+        if (isBlank(schlagwoerter)) {
+            this.schlagwoerter = [];
+        } else {
+            const tmpSchlagwoerter: Array<string> =
+                schlagwoerter as Array<string>;
+            this.schlagwoerter = tmpSchlagwoerter;
+        }
         // _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
         // _.times(MAX_RATING - rating, () => this.ratingArray.push(false));
-        // this.email = email || undefined;
+        this.email = email || undefined;
     }
 
-    // private resetSchlagwoerter(): void {
-    //     this.schlagwoerter = [];
-    // }
+    private resetSchlagwoerter(): void {
+        this.schlagwoerter = [];
+    }
 
-    // private addSchlagwort(schlagwort: string): void {
-    //     if (isBlank(this.schlagwoerter)) {
-    //         this.schlagwoerter = [];
-    //     }
-    //     const tmpSchlagwoerter: Array<string> =
-    //         this.schlagwoerter as Array<string>;
-    //     tmpSchlagwoerter.push(schlagwort);
-    // }
+    private addSchlagwort(schlagwort: string): void {
+        if (isBlank(this.schlagwoerter)) {
+            this.schlagwoerter = [];
+        }
+        const tmpSchlagwoerter: Array<string> =
+            this.schlagwoerter as Array<string>;
+        tmpSchlagwoerter.push(schlagwort);
+    }
 }
