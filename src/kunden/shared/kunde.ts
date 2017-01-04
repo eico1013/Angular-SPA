@@ -47,12 +47,12 @@ export interface KundeShared {
     email: string|undefined;
     newsletter: boolean|undefined;
     geburtsdatum: string|undefined;
-    umsatz?: Umsatz|undefined;
+    umsatz?: Umsatz;
     homepage: string|undefined;
     geschlecht: string|undefined;
     username: string|undefined;
     interessen?: Array<string>|undefined;
-    adresse?: Adresse|undefined;
+    adresse?: Adresse;
 }
 
 /**
@@ -341,8 +341,7 @@ export class Kunde {
         public geburtsdatum: Moment|undefined,
         public homepage: string|undefined, public geschlecht: string|undefined,
         public username: string|undefined,
-
-        public interessen?: Array<string>|undefined, public link?: string,
+        public interessen?: Array<string>|undefined,
         public umsatz?: Umsatz|undefined, public adresse?: Adresse|undefined) {
         this._id = _id || undefined;
         this.nachname = nachname || undefined;
