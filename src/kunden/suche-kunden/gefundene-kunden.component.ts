@@ -48,8 +48,8 @@ import {KundenService} from '../shared/kunden.service';
                         <th>Nr.</th>
                         <th>ID</th>
                         <th>Nachname</th>
-                  <!--      <th>Verlag</th>
-                        <th>Schlagw&ouml;rter</th> -->
+                  <!--      <th>Verlag</th> -->
+                        <th>Interessen</th> 
                         <th>
                             <span class="sr-only">
                                 Spalte f&uuml;r Details
@@ -66,7 +66,7 @@ import {KundenService} from '../shared/kunden.service';
                         <!-- Event-Binding: statt (click) auch on-click -->
                         <!-- Animation flyInOut siehe unten -->
                         <tr *ngFor="let k of kunden; let i = index"
-                            (click)="onSelect(b)" [@rowOut]="'in'">
+                            (click)="onSelect(k)" [@rowOut]="'in'">
                             <td>{{i + 1}}</td>
                             <td>{{k._id}}</td>
                             <td>{{k.nachname}}</td>
@@ -80,19 +80,22 @@ import {KundenService} from '../shared/kunden.service';
                                     </span>
                                     <span *ngSwitchDefault>unbekannt</span>
                                 </span>
-                            </td>
+                            </td> -->
                             <td>
-                                <span *ngFor="let sw of b.schlagwoerter">
+                                <span *ngFor="let sw of k.interessen">
                                     <span [ngSwitch]="sw">
-                                        <span *ngSwitchCase="'JAVASCRIPT'">
-                                            JavaScript<br>
+                                        <span *ngSwitchCase="'S'">
+                                            S<br>
                                         </span>
-                                        <span *ngSwitchCase="'TYPESCRIPT'">
-                                            TypeScript
+                                        <span *ngSwitchCase="'L'">
+                                            L
+                                        </span>
+                                        <span *ngSwitchCase="'R'">
+                                            R
                                         </span>
                                     </span>
                                 </span>
-                            </td>                               -->
+                            </td>                               
                             <td>
                                 <!-- Pfad detailsKunden/:id, in root.router.ts
                                 -->
@@ -100,7 +103,7 @@ import {KundenService} from '../shared/kunden.service';
                                 <!--
                                 http://v4-alpha.getbootstrap.com/components/modal
                                 -->
-                                <a [routerLink]="['/detailsBuch', k._id]"
+                                <a [routerLink]="['/detailsKunde', k._id]"
                                    data-toggle="tooltip"
                                    title="Details anzeigen">
                                     <i class="fa fa-search-plus"></i>
@@ -214,7 +217,7 @@ export default class GefundeneKundenComponent {
         this.kundenService.remove(kunde, undefined as any, errorFn);
         if (isPresent(this.kunden)) {
             const tmp: Array<Kunde> = this.kunden as Array<Kunde>;
-            this.kunden = tmp.filter((b: Kunde) => b._id !== kunde._id);
+            this.kunden = tmp.filter((k: Kunde) => k._id !== kunde._id);
         }
     }
 

@@ -51,7 +51,7 @@ export default class CreateKundenComponent implements OnInit {
     readonly newsletter: FormControl = new FormControl(false);
     readonly geburtsdatum: FormControl = new FormControl(null);
     readonly homepage: FormControl = new FormControl(null);
-    readonly geschlecht: FormControl = new FormControl('M');
+    readonly geschlecht: FormControl = new FormControl(null);
     readonly umsatz: FormControl = new FormControl(null);
     readonly S: FormControl = new FormControl(false);
     readonly R: FormControl = new FormControl(false);
@@ -81,6 +81,7 @@ export default class CreateKundenComponent implements OnInit {
             geburtsdatum: this.geburtsdatum,
             homepage: this.homepage,
             umsatz: this.umsatz,
+            geschlecht: this.geschlecht,
             S: this.S,
             R: this.R,
             L: this.L

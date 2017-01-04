@@ -26,8 +26,9 @@ import CreateKundenGuard from './create-kunden/create-kunden.component';
 // import CreateBuchComponent from './create-buch/create-buch.component';
 // import CreateBuchGuard from './create-buch/create-buch.guard';
 // import DetailsBuchComponent from './details-buch/details-buch.component';
-// import DetailsSchlagwoerterComponent from
-// './details-buch/details-schlagwoerter.component';
+import DetailsKundeComponent from './details-kunden/details-kunde.component';
+import DetailsInteressenComponent from
+'./details-kunden/details-interessen.component';
 // import DetailsStammdatenComponent from
 // './details-buch/details-stammdaten.component';
 // import BalkendiagrammComponent from './diagramme/balkendiagramm.component';
@@ -52,12 +53,16 @@ import SuchkriterienComponent from './suche-kunden/suchkriterien.component';
 const komponentenExport: Array<Type<any>> = [
     CreateKundenComponent, /*DetailsBuchComponent, BalkendiagrammComponent,
     LiniendiagrammComponent, TortendiagrammComponent, */
-    SucheKundenComponent   /*,
-  UpdateBuchComponent*/
+    SucheKundenComponent,  /*,
+ UpdateBuchComponent*/
+    /*CreateBuchComponent,*/ DetailsKundeComponent, /* BalkendiagrammComponent,
+    LiniendiagrammComponent, TortendiagrammComponent, */
+    SucheKundenComponent                            /*,
+                           UpdateBuchComponent*/
 ];
 
 const komponentenIntern: Array<Type<any>> = [
-    /*DetailsSchlagwoerterComponent, DetailsStammdatenComponent,*/
+    DetailsInteressenComponent, /*DetailsStammdatenComponent,*/
     GefundeneKundenComponent, SucheKundenComponent, SuchergebnisComponent,
     SuchkriterienComponent /*, UpdateSchlagwoerterComponent,
      UpdateStammdatenComponent*/

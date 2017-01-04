@@ -197,7 +197,7 @@ export class KundenService {
     save(
         neuerKunde: Kunde, successFn: (location: string|undefined) => void,
         errorFn: (status: number, text: string) => void): void {
-        neuerKunde.datum = moment(new Date());
+        neuerKunde.geburtsdatum = moment(new Date());
 
         const uri: string = this.baseUriKunden;
         const body: string = JSON.stringify(neuerKunde.toJSON());
