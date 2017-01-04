@@ -69,6 +69,13 @@ import {Kunde} from '../shared';
                     <!-- TODO 2 Nachkommastellen. Pipe "| number: '.2'" -->
                     <td>{{kunde.umsatz.betrag | currency: kunde.umsatz.waehrung: true}}</td>
                 </tr>
+                <tr>
+                    <td><label>Adresse</label></td>
+                    <td>
+                        {{kunde.adresse.plz}}<br/>
+                        {{kunde.adresse.ort}}
+                    </td>
+                </tr>
             </tbody>
         </table>
     `
