@@ -24,7 +24,11 @@
 import * as moment_ from 'moment';
 import {Moment} from 'moment';
 
-import {isBlank, /*isEmpty, */ isPresent} from '../../shared';
+import {isBlank, /*isEmpty,*/ isPresent} from '../../shared';
+
+import {Adresse} from './adresse';
+import {Umsatz} from './umsatz';
+
 
 // const MIN_RATING: number = 0;
 // const MAX_RATING: number = 5;
@@ -43,11 +47,12 @@ export interface KundeShared {
     email: string|undefined;
     newsletter: boolean|undefined;
     geburtsdatum: string|undefined;
-    umsatz?: Object;
+    umsatz?: Umsatz;
     homepage: string|undefined;
     geschlecht: string|undefined;
     username: string|undefined;
     interessen?: Array<string>|undefined;
+    adresse?: Adresse;
 }
 
 /**
@@ -92,15 +97,35 @@ export class Kunde {
      */
     static fromServer(kundeServer: KundeServer): Kunde {
         let geburtsdatum: moment_.Moment|undefined = undefined;
+        let umsatz: Umsatz|undefined = undefined;
+        let adresse: Adresse|undefined = undefined;
         if (isPresent(kundeServer.geburtsdatum)) {
             const tmp: string = kundeServer.geburtsdatum as string;
             geburtsdatum = moment(tmp);
         }
+        if (isPresent(kundeServer.umsatz)) {
+            let tmp: Umsatz = kundeServer.umsatz as Umsatz;
+            console.log('umsatz=', tmp);
+
+            umsatz = new Umsatz(
+                (kundeServer.umsatz as Umsatz).betrag,
+                (kundeServer.umsatz as Umsatz).waehrung);
+        }
+
+        if (isPresent(kundeServer.adresse)) {
+            let tmp: Adresse = kundeServer.adresse as Adresse;
+            console.log('adresse=', tmp);
+
+            adresse = new Adresse(
+                (kundeServer.adresse as Adresse).plz,
+                (kundeServer.adresse as Adresse).ort);
+        }
+
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
             kundeServer.newsletter, geburtsdatum, kundeServer.homepage,
             kundeServer.geschlecht, kundeServer.username,
-            kundeServer.interessen);
+            kundeServer.interessen, umsatz, adresse);
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
@@ -287,20 +312,22 @@ export class Kunde {
     toString(): string {
         return JSON.stringify(this, null, 2);
     }
-
     // wird aufgerufen von fromServer() oder von fromForm()
     private constructor(
 
         public _id: string|undefined, public nachname: string|undefined,
         public email: string|undefined, public newsletter: boolean|undefined,
-        public geburtsdatum: Moment|undefined, /*public umsatz: Umsatz,*/
+        public geburtsdatum: Moment|undefined,
         public homepage: string|undefined, public geschlecht: string|undefined,
         public username: string|undefined,
-        public interessen?: Array<string>|undefined) {
+        public interessen?: Array<string>|undefined,
+        public umsatz?: Umsatz|undefined, public adresse?: Adresse|undefined) {
         this._id = _id || undefined;
         this.nachname = nachname || undefined;
         this.email = email || undefined;
         this.newsletter = newsletter || undefined;
+        this.umsatz = umsatz || undefined;
+        this.adresse = adresse || undefined;
         this.geburtsdatum = isPresent(geburtsdatum) ?
             geburtsdatum :
             moment(new Date().toISOString());
@@ -311,6 +338,7 @@ export class Kunde {
             const tmpinteressen: Array<string> = interessen as Array<string>;
             this.interessen = tmpinteressen;
         }
+
         // _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
         // _.times(MAX_RATING - rating, () => this.ratingArray.push(false));
         // this.email = email || undefined;
