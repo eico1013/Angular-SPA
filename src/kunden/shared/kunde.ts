@@ -21,14 +21,14 @@
 // Moment exportiert den Namespace moment und die gleichnamige Function:
 //
 // http://stackoverflow.com/questions/35254524/using-moment-js-in-angular-2-typescript-application#answer-35255412
-// import * as moment_ from 'moment';
-// import {Moment} from 'moment';
+import * as moment_ from 'moment';
+import {Moment} from 'moment';
 
-import {/*isBlank, isEmpty,*/ isPresent} from '../../shared';
+import {/*isBlank,*/ isEmpty, isPresent} from '../../shared';
 
 // const MIN_RATING: number = 0;
 // const MAX_RATING: number = 5;
-// const moment: (date: string) => Moment = (<any>moment_)['default'];
+const moment: (date: string) => Moment = (<any>moment_)['default'];
 
 // declare type Verlag = 'IWI_VERLAG' | 'HSKA_VERLAG';
 // declare type BuchArt = 'KINDLE' | 'DRUCKAUSGABE';
@@ -47,6 +47,7 @@ export interface KundeShared {
     homepage: string|undefined;
     geschlecht: string|undefined;
     username: string|undefined;
+    datum: string|undefined;
 }
 
 /**
@@ -74,6 +75,9 @@ export interface KundeForm extends KundeShared {
     // rating: string;
     // javascript?: boolean;
     // typescript?: boolean;
+    S?: boolean;
+    R?: boolean;
+    L?: boolean;
 }
 
 /**
@@ -90,48 +94,49 @@ export class Kunde {
      * @return Das initialisierte Buch-Objekt
      */
     static fromServer(kundeServer: KundeServer): Kunde {
-        // let datum: moment_.Moment|undefined = undefined;
-        // if (isPresent(kundeServer.datum)) {
-        //     const tmp: string = kundeServer.datum as string;
-        //     datum = moment(tmp);
-        // }
+        let datum: moment_.Moment|undefined = undefined;
+        if (isPresent(kundeServer.datum)) {
+            const tmp: string = kundeServer.datum as string;
+            datum = moment(tmp);
+        }
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
             kundeServer.newsletter, kundeServer.geburtsdatum,
-            kundeServer.homepage, kundeServer.geschlecht, kundeServer.username);
+            kundeServer.homepage, kundeServer.geschlecht, kundeServer.username,
+            datum);
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
 
+    /**
+     * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular
+     * kommen.
+     * @param buch JSON-Objekt mit Daten vom Formular
+     * @return Das initialisierte Buch-Objekt
+     */
+    static fromForm(kundeForm: KundeForm): Kunde {
+        const interessen: Array<string> = [];
+        if (kundeForm.S) {
+            interessen.push('S');
+        }
+        if (kundeForm.R) {
+            interessen.push('R');
+        }
+        if (kundeForm.L) {
+            interessen.push('L');
+        }
 
+        const datumMoment: Moment|undefined = isEmpty(kundeForm.datum) ?
+            undefined :
+            moment(kundeForm.datum as string);
 
-    // /**
-    //  * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular
-    //  kommen.
-    //  * @param buch JSON-Objekt mit Daten vom Formular
-    //  * @return Das initialisierte Buch-Objekt
-    //  */
-    // static fromForm(buchForm: BuchForm): Buch {
-    //     const schlagwoerter: Array<string> = [];
-    //     if (buchForm.javascript) {
-    //         schlagwoerter.push('JAVASCRIPT');
-    //     }
-    //     if (buchForm.typescript) {
-    //         schlagwoerter.push('TYPESCRIPT');
-    //     }
-
-    //     const datumMoment: Moment|undefined = isEmpty(buchForm.datum) ?
-    //         undefined :
-    //         moment(buchForm.datum as string);
-
-    //     const buch: Buch = new Buch(
-    //         buchForm._id, buchForm.titel, +buchForm.rating, buchForm.art,
-    //         buchForm.verlag, datumMoment, buchForm.preis, buchForm.rabatt /
-    //         100,
-    //         buchForm.lieferbar, schlagwoerter, buchForm.email);
-    //     console.log('Buch.fromForm(): buch=', buch);
-    //     return buch;
-    // }
+        const kunde: Kunde = new Kunde(
+            kundeForm._id, kundeForm.nachname, kundeForm.email,
+            kundeForm.newsletter, kundeForm.geburtsdatum, kundeForm.homepage,
+            kundeForm.geschlecht, kundeForm.username, datumMoment);
+        console.log('Kunde.fromForm(): kunde=', kunde);
+        return kunde;
+    }
 
     // // http://momentjs.com
     // get datumFormatted(): string|undefined {
@@ -269,9 +274,9 @@ export class Kunde {
      * @return Das JSON-Objekt f&uuml;r den RESTful Web Service
      */
     toJSON(): KundeServer {
-        // const datum: string|undefined = this.datum === undefined ?
-        //     undefined :
-        //     this.datum.format('YYYY-MM-DD');
+        const datum: string|undefined = this.datum === undefined ?
+            undefined :
+            this.datum.format('YYYY-MM-DD');
         return {
             _id: this._id,
             nachname: this.nachname,
@@ -280,7 +285,8 @@ export class Kunde {
             geburtsdatum: this.geburtsdatum,
             homepage: this.homepage,
             geschlecht: this.geschlecht,
-            username: this.username
+            username: this.username,
+            datum: datum
         };
     }
 
@@ -295,12 +301,13 @@ export class Kunde {
         public email: string|undefined, public newsletter: boolean|undefined,
         public geburtsdatum: string|undefined, /*public umsatz: Umsatz,*/
         public homepage: string|undefined, public geschlecht: string|undefined,
-        public username: string|undefined) {
+        public username: string|undefined, public datum: Moment|undefined) {
         this._id = _id || undefined;
         this.nachname = nachname;
         this.email = email || undefined;
         this.newsletter = newsletter || undefined;
         this.geburtsdatum = geburtsdatum || undefined;
+        this.datum = datum || undefined;
 
         // if (isBlank(schlagwoerter)) {
         //     this.schlagwoerter = [];

@@ -25,6 +25,8 @@ import SucheBuecherComponent from '../buecher/suche-buecher/suche-buecher.compon
 import UpdateBuchComponent from '../buecher/update-buch/update-buch.component';
 import HomeComponent from '../home/home.component';
 import AdminGuard from '../iam/admin.guard';
+import CreateKundenComponent from '../kunden/create-kunden/create-kunden.component';
+import CreateKundenGuard from '../kunden/create-kunden/create-kunden.guard';
 import SucheKundenComponent from '../kunden/suche-kunden/suche-kunden.component';
 
 export const HOME_PATH: string = '';
@@ -57,6 +59,14 @@ const routes: Routes = [
       canActivate: [AdminGuard],
       canDeactivate: [CreateBuchGuard]
     },
+    {
+      path: 'createKunden',
+      component: CreateKundenComponent,
+      canActivate: [AdminGuard],
+      canDeactivate: [CreateKundenGuard]
+    },
+
+
     // Weiterer Pfad fuer die Produktion.
     // In der Entwicklung ist es einfacher, bei FALSCHEN Pfaden die Fehler sehen
     // {path: '**', component: NotFoundComponent}

@@ -52,7 +52,7 @@ export default class CreateKundenComponent implements OnInit {
     readonly geburtsdatum: FormControl = new FormControl(null);
     readonly homepage: FormControl = new FormControl(null);
     readonly geschlecht: FormControl = new FormControl('M');
-    readonly umsatz: FormControl = new FormControl (null);
+    readonly umsatz: FormControl = new FormControl(null);
     readonly S: FormControl = new FormControl(false);
     readonly R: FormControl = new FormControl(false);
     readonly L: FormControl = new FormControl(false);
@@ -60,9 +60,8 @@ export default class CreateKundenComponent implements OnInit {
     fertig: boolean = false;
 
     constructor(
-        private formBuilder: FormBuilder,
-        private kundenService: KundenService, private router: Router,
-        private titleService: Title) {
+        private formBuilder: FormBuilder, private kundenService: KundenService,
+        private router: Router, private titleService: Title) {
         console.log('CreateKundenComponent.constructor()');
         if (isPresent(router)) {
             console.log('Injizierter Router:', router);
@@ -114,17 +113,17 @@ export default class CreateKundenComponent implements OnInit {
         const neuerKunde: Kunde = Kunde.fromForm(this.form.value);
         console.log('neuerKunde=', neuerKunde);
 
-        const successFn: (location: string|undefined) => void =
-            (location = undefined) => {
-                console.log(
-                    `CreateKunde.onSave(): successFn(): location: ${location}`);
-                // TODO Das Response-Objekt enthaelt im Header NICHT "Location"
-                console.log(
-                    `CreateKunde.onSave(): successFn(): navigate: ${HOME_PATH}`);
-                this.fertig = true;
-                this.showWarning = false;
-                this.router.navigate([HOME_PATH]);
-            };
+        const successFn: (
+            location: string|undefined) => void = (location = undefined) => {
+            console.log(
+                `CreateKunde.onSave(): successFn(): location: ${location}`);
+            // TODO Das Response-Objekt enthaelt im Header NICHT "Location"
+            console.log(
+                `CreateKunde.onSave(): successFn(): navigate: ${HOME_PATH}`);
+            this.fertig = true;
+            this.showWarning = false;
+            this.router.navigate([HOME_PATH]);
+        };
         const errorFn: (
             status: number,
             text: string|undefined) => void = (status, text = undefined) => {
