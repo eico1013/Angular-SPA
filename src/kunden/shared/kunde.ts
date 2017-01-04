@@ -47,12 +47,12 @@ export interface KundeShared {
     email: string|undefined;
     newsletter: boolean|undefined;
     geburtsdatum: string|undefined;
-    umsatz?: Umsatz;
+    umsatz?: Umsatz|undefined;
     homepage: string|undefined;
     geschlecht: string|undefined;
     username: string|undefined;
     interessen?: Array<string>|undefined;
-    adresse?: Adresse;
+    adresse?: Adresse|undefined;
 }
 
 /**
@@ -67,6 +67,7 @@ export interface KundeShared {
 export interface KundeServer extends KundeShared {
     // rating: number|undefined;
     interessen?: Array<string>|undefined;
+    links?: Array<string>;
 }
 
 /**
@@ -103,6 +104,7 @@ export class Kunde {
             const tmp: string = kundeServer.geburtsdatum as string;
             geburtsdatum = moment(tmp);
         }
+
         if (isPresent(kundeServer.umsatz)) {
             let tmp: Umsatz = kundeServer.umsatz as Umsatz;
             console.log('umsatz=', tmp);
@@ -120,6 +122,25 @@ export class Kunde {
                 (kundeServer.adresse as Adresse).plz,
                 (kundeServer.adresse as Adresse).ort);
         }
+
+
+        if (kundeServer.links === undefined) {
+            kundeServer.links = [];
+            console.log('Links war undefined');
+        }
+
+        var linksObject: Object;
+
+        linksObject = kundeServer.links[0];
+
+        var linksJSON: string = JSON.stringify(linksObject);
+        var linksArray: Array<string> = linksJSON.split('/');
+        var linksString: string = linksArray[linksArray.length - 1];
+
+
+
+        kundeServer._id = linksString.substring(0, linksString.length - 2);
+
 
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
@@ -320,7 +341,8 @@ export class Kunde {
         public geburtsdatum: Moment|undefined,
         public homepage: string|undefined, public geschlecht: string|undefined,
         public username: string|undefined,
-        public interessen?: Array<string>|undefined,
+
+        public interessen?: Array<string>|undefined, public link?: string,
         public umsatz?: Umsatz|undefined, public adresse?: Adresse|undefined) {
         this._id = _id || undefined;
         this.nachname = nachname || undefined;
