@@ -54,7 +54,7 @@ import {KundenService} from '../shared/kunden.service';
                         Interessen
                     </a>
                 </li> -->
-                <li class="nav-item" *ngIf="buch.hasInteressen()">
+                <li class="nav-item" *ngIf="kunde.hasInteressen()">
                     <a class="nav-link" href="#interessen"
                        data-toggle="tab">
                         Interessen
@@ -69,7 +69,7 @@ import {KundenService} from '../shared/kunden.service';
                     </div>
                 </div> -->
                 <div class="tab-pane fade" id="interessen"
-                    *ngIf="buch.hasInteressen()">
+                    *ngIf="kunde.hasInteressen()">
                     <div class="mt-1">
                         <my-details-interessen [values]="kunde.interessen">
                         </my-details-interessen>
@@ -130,7 +130,7 @@ export default class DetailsKundeComponent implements OnInit {
         const next: (kunde: Kunde) => void = (kunde) => {
             this.waiting = false;
             this.kunde = kunde;
-            console.log('DetailsKundeComponent.buch=', this.kunde);
+            console.log('DetailsKundeComponent.kunde=', this.kunde);
 
             const titel: string =
                 this.kunde === null ? 'Details' : `Details ${this.kunde._id}`;
@@ -160,7 +160,7 @@ export default class DetailsKundeComponent implements OnInit {
                     this.errorMsg = 'Ein Fehler ist aufgetreten.';
                     break;
             }
-            console.log(`DetailsBuchComponent.errorMsg: ${this.errorMsg}`);
+            console.log(`DetailsKundeComponent.errorMsg: ${this.errorMsg}`);
 
             this.titleService.setTitle('Fehler');
         };
