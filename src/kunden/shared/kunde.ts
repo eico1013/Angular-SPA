@@ -62,6 +62,7 @@ export interface KundeShared {
 export interface KundeServer extends KundeShared {
     // rating: number|undefined;
     interessen?: Array<string>|undefined;
+    links?: Array<string>;
 }
 
 /**
@@ -96,6 +97,24 @@ export class Kunde {
             const tmp: string = kundeServer.geburtsdatum as string;
             geburtsdatum = moment(tmp);
         }
+
+        if (kundeServer.links === undefined) {
+            kundeServer.links = [];
+            console.log('Links war undefined');
+        }
+
+        var linksObject: Object;
+
+        linksObject = kundeServer.links[0];
+
+        var linksJSON: string = JSON.stringify(linksObject);
+        var linksArray: Array<string> = linksJSON.split('/');
+        var linksString: string = linksArray[linksArray.length - 1];
+
+
+
+        kundeServer._id = linksString.substring(0, linksString.length - 2);
+
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
             kundeServer.newsletter, geburtsdatum, kundeServer.homepage,
@@ -296,7 +315,7 @@ export class Kunde {
         public geburtsdatum: Moment|undefined, /*public umsatz: Umsatz,*/
         public homepage: string|undefined, public geschlecht: string|undefined,
         public username: string|undefined,
-        public interessen?: Array<string>|undefined) {
+        public interessen?: Array<string>|undefined, public link?: string) {
         this._id = _id || undefined;
         this.nachname = nachname || undefined;
         this.email = email || undefined;
