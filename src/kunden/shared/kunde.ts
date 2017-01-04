@@ -43,7 +43,7 @@ export interface KundeShared {
     email: string|undefined;
     newsletter: boolean|undefined;
     geburtsdatum: string|undefined;
-    // umsatz?: Umsatz;
+    umsatz?: string|undefined;
     homepage: string|undefined;
     geschlecht: string|undefined;
     username: string|undefined;
