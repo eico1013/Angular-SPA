@@ -48,12 +48,12 @@ import {KundenService} from '../shared/kunden.service';
 
             <!-- http://v4-alpha.getbootstrap.com/components/navs/#tabs -->
             <ul class="nav nav-tabs mt-2">
-                <--! <li class="nav-item">
-                    <a class="nav-link active" href="#interessen"
+                <li class="nav-item">
+                    <a class="nav-link active" href="#stammdaten"
                        data-toggle="tab">
-                        Interessen
+                        Kundendaten
                     </a>
-                </li> -->
+                </li>
                 <li class="nav-item" *ngIf="kunde.hasInteressen()">
                     <a class="nav-link" href="#interessen"
                        data-toggle="tab">
@@ -63,11 +63,12 @@ import {KundenService} from '../shared/kunden.service';
             </ul>
 
             <div class="tab-content">
-                <--! <div class="tab-pane fade in active" id="interessen">
+                 <div class="tab-pane fade in active" id="stammdaten">
                     <div class="mt-1">
-                       
+                        <my-details-stammdaten [kunde]="kunde">
+                        </my-details-stammdaten>   
                     </div>
-                </div> -->
+                </div>
                 <div class="tab-pane fade" id="interessen"
                     *ngIf="kunde.hasInteressen()">
                     <div class="mt-1">

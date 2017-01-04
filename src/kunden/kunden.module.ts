@@ -29,6 +29,8 @@ import DetailsInteressenComponent from
 './details-kunden/details-interessen.component';
 // import DetailsStammdatenComponent from
 // './details-buch/details-stammdaten.component';
+import DetailsStammdatenComponent from
+'./details-kunden/details-stammdaten.component';
 // import BalkendiagrammComponent from './diagramme/balkendiagramm.component';
 // import LiniendiagrammComponent from './diagramme/liniendiagramm.component';
 // import TortendiagrammComponent from './diagramme/tortendiagramm.component';
@@ -56,7 +58,7 @@ const komponentenExport: Array<Type<any>> = [
 ];
 
 const komponentenIntern: Array<Type<any>> = [
-    DetailsInteressenComponent, /*DetailsStammdatenComponent,*/
+    DetailsInteressenComponent, DetailsStammdatenComponent,
     GefundeneKundenComponent, SucheKundenComponent, SuchergebnisComponent,
     SuchkriterienComponent /*, UpdateSchlagwoerterComponent,
      UpdateStammdatenComponent*/

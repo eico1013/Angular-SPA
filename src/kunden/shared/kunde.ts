@@ -201,15 +201,15 @@ export class Kunde {
     //     return buch;
     // }
 
-    // // http://momentjs.com
-    // get datumFormatted(): string|undefined {
-    //     let result: string|undefined = undefined;
-    //     if (isPresent(this.datum)) {
-    //         const datum: Moment = this.datum as Moment;
-    //         result = datum.format('Do MMM YYYY');
-    //     }
-    //     return result;
-    // }
+    // http://momentjs.com
+    get datumFormatted(): string|undefined {
+        let result: string|undefined = undefined;
+        if (isPresent(this.geburtsdatum)) {
+            const datum: Moment = this.geburtsdatum as Moment;
+            result = datum.format('Do MMM YYYY');
+        }
+        return result;
+    }
 
     // get datumFromNow(): string|undefined {
     //     let result: string|undefined = undefined;
