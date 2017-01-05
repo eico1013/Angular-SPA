@@ -27,6 +27,7 @@ System.config({
     map: {
         'app': 'tmp/app',
         'buecher': 'tmp/buecher',
+        'kunden': 'tmp/kunden',
         'home': 'tmp/home',
         'iam': 'tmp/iam',
         'layout': 'tmp/layout',
@@ -43,6 +44,15 @@ System.config({
             defaultExtension: 'js'
         },
         'buecher/shared': {
+            main: 'index.js',
+            defaultExtension: 'js'
+        },
+        'kunden': {
+            // Barrel
+            main: 'index.js',
+            defaultExtension: 'js'
+        },
+        'kunden/shared': {
             main: 'index.js',
             defaultExtension: 'js'
         },

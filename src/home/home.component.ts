@@ -23,7 +23,18 @@ import {log} from '../shared';
 @Component({
     selector: 'my-home',
     template: `
-        <h2>Hallo!</h2>
+    <div class="card">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="progress">
+                        <div class="progress-bar progress-success">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
     `
 })
 export default class HomeComponent implements OnInit {
