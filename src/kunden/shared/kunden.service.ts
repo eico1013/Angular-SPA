@@ -18,8 +18,8 @@
 import {EventEmitter, Inject, Injectable} from '@angular/core';
 // Bereitgestellt durch das HttpModule (s. Re-Export im SharedModule)
 // HttpModule enthaelt nur Services, keine Komponenten
-// import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
-import {Http, Response, URLSearchParams} from '@angular/http';
+import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
+// import {Http, Response, URLSearchParams} from '@angular/http';
 
 // import {ChartConfig, ChartDataSet} from 'chart.js';
 // import * as _ from 'lodash';
