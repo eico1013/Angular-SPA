@@ -26,8 +26,10 @@ import {Moment} from 'moment';
 
 import {isBlank, isEmpty, isPresent} from '../../shared';
 
+import {Account} from './account';
 import {Adresse} from './adresse';
 import {Umsatz} from './umsatz';
+
 
 
 // const MIN_RATING: number = 0;
@@ -50,7 +52,7 @@ export interface KundeShared {
     umsatz?: Umsatz;
     homepage: string|undefined;
     geschlecht: string|undefined;
-    username: string|undefined;
+    account?: Account;
     interessen?: Array<string>|undefined;
     adresse?: Adresse;
 }
@@ -69,6 +71,9 @@ export interface KundeServer extends KundeShared {
     interessen?: Array<string>|undefined;
     links?: Array<string>;
     _links?: Array<string>;
+    username?: string;
+    waehrung?: string;
+    umsatz?: Umsatz;
 }
 
 /**
@@ -89,6 +94,8 @@ export interface KundeForm extends KundeShared {
     ort?: string;
     betrag?: string;
     waehrung?: string;
+    passwort?: string;
+    username?: string;
 }
 
 /**
@@ -108,6 +115,7 @@ export class Kunde {
         let geburtsdatum: moment_.Moment|undefined = undefined;
         let umsatz: Umsatz|undefined = undefined;
         let adresse: Adresse|undefined = undefined;
+        let account: Account|undefined = undefined;
         if (isPresent(kundeServer.geburtsdatum)) {
             const tmp: string = kundeServer.geburtsdatum as string;
             geburtsdatum = moment(tmp);
@@ -129,6 +137,13 @@ export class Kunde {
             adresse = new Adresse(
                 (kundeServer.adresse as Adresse).plz,
                 (kundeServer.adresse as Adresse).ort);
+        }
+
+        if (isPresent(kundeServer.username)) {
+            let tmp: Account = kundeServer.account as Account;
+            console.log('account=', tmp);
+
+            account = new Account(kundeServer.username as string);
         }
 
 
@@ -172,8 +187,8 @@ export class Kunde {
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
             kundeServer.newsletter, geburtsdatum, kundeServer.homepage,
-            kundeServer.geschlecht, kundeServer.username,
-            kundeServer.interessen, umsatz, adresse);
+            kundeServer.geschlecht, account, kundeServer.interessen, umsatz,
+            adresse);
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
@@ -203,14 +218,19 @@ export class Kunde {
 
         const adresse: Adresse|undefined =
             new Adresse(kundeForm.plz, kundeForm.ort);
+        console.log('Adresse from Form=', kundeForm.plz, kundeForm.ort);
         const umsatz: Umsatz|undefined =
             new Umsatz(kundeForm.betrag, kundeForm.waehrung);
+        console.log('Umsatz from Form=', kundeForm.betrag, kundeForm.waehrung);
+        const account: Account|undefined =
+            new Account(kundeForm.username, kundeForm.passwort);
+        console.log(
+            'Account from Form=', kundeForm.username, kundeForm.passwort);
 
         const kunde: Kunde = new Kunde(
             kundeForm._id, kundeForm.nachname, kundeForm.email,
             kundeForm.newsletter, geburtsdatumMoment, kundeForm.homepage,
-            kundeForm.geschlecht, kundeForm.username, interessen, umsatz,
-            adresse);
+            kundeForm.geschlecht, account, interessen, umsatz, adresse);
         console.log('Kunde.fromForm(): kunde=', kunde);
         return kunde;
     }
@@ -348,7 +368,8 @@ export class Kunde {
      * @return Das JSON-Objekt f&uuml;r den RESTful Web Service
      */
     toJSON(): KundeServer {
-        const geburtsdatum: string|undefined = this.geburtsdatum === undefined ?
+        const geburtsdatum: string|undefined = this.geburtsdatum ===
+        undefined ?
             undefined :
             this.geburtsdatum.format('YYYY-MM-DD');
         return {
@@ -359,8 +380,10 @@ export class Kunde {
             geburtsdatum: geburtsdatum,
             homepage: this.homepage,
             geschlecht: this.geschlecht,
-            username: this.username,
-            interessen: this.interessen
+            account: this.account,
+            interessen: this.interessen,
+            waehrung: 'EUR',  // this.umsatz,
+            adresse: this.adresse
         };
     }
 
@@ -374,13 +397,14 @@ export class Kunde {
         public email: string|undefined, public newsletter: boolean|undefined,
         public geburtsdatum: Moment|undefined,
         public homepage: string|undefined, public geschlecht: string|undefined,
-        public username: string|undefined,
+        public account?: Account|undefined,
         public interessen?: Array<string>|undefined,
         public umsatz?: Umsatz|undefined, public adresse?: Adresse|undefined) {
         this._id = _id || undefined;
         this.nachname = nachname || undefined;
         this.email = email || undefined;
         this.newsletter = newsletter || undefined;
+        this.account = account || undefined;
         this.umsatz = umsatz || undefined;
         this.adresse = adresse || undefined;
         this.geburtsdatum = isPresent(geburtsdatum) ?

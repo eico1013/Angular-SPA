@@ -62,7 +62,7 @@ import {Kunde} from '../shared';
                 </tr>
                 <tr>
                     <td><label>Username</label></td>
-                    <td>{{kunde.username}}</td>
+                    <td>{{kunde.account.username}}</td>
                 </tr>
                 <tr>
                     <td><label>Umsatz</label></td>
