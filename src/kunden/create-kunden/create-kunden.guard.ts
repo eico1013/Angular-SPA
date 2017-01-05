@@ -19,18 +19,18 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
 
 import {log} from '../../shared';
-import CreateKundeComponent from './create-kunden.component';
+import CreateKundenComponent from './create-kunden.component';
 
 @Injectable()
 export default class CreateKundeGuard implements
-    CanDeactivate<CreateKundeComponent> {
+    CanDeactivate<CreateKundenComponent> {
     constructor() {
         console.log('CreateKundeGuard.constructor()');
     }
 
     @log
     canDeactivate(
-        createKunde: CreateKundeComponent, route: ActivatedRouteSnapshot,
+        createKunde: CreateKundenComponent, route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
         if (createKunde.fertig) {
             return true;

@@ -48,14 +48,18 @@ export default class CreateKundenComponent implements OnInit {
         null, [Validators.required as any, KundeValidator.nachname]);
     readonly email: FormControl =
         new FormControl(null, <any>[Validators.required, KundeValidator.email]);
-    readonly newsletter: FormControl = new FormControl(false);
+    readonly newsletter: FormControl = new FormControl(true);
     readonly geburtsdatum: FormControl = new FormControl(null);
     readonly homepage: FormControl = new FormControl(null);
-    readonly geschlecht: FormControl = new FormControl(null);
+    readonly adresse: FormControl = new FormControl(null);
+    readonly geschlecht: FormControl = new FormControl('M');
     readonly umsatz: FormControl = new FormControl(null);
-    readonly S: FormControl = new FormControl(false);
+    readonly username: FormControl = new FormControl(null);
+    readonly S: FormControl = new FormControl(true);
     readonly R: FormControl = new FormControl(false);
     readonly L: FormControl = new FormControl(false);
+    readonly plz: FormControl = new FormControl(null);
+    readonly ort: FormControl = new FormControl(null);
     showWarning: boolean = false;
     fertig: boolean = false;
 
@@ -80,11 +84,15 @@ export default class CreateKundenComponent implements OnInit {
             newsletter: this.newsletter,
             geburtsdatum: this.geburtsdatum,
             homepage: this.homepage,
+            adresse: this.adresse,
             umsatz: this.umsatz,
             geschlecht: this.geschlecht,
+            username: this.username,
             S: this.S,
             R: this.R,
-            L: this.L
+            L: this.L,
+            plz: this.plz,
+            ort: this.ort
         });
 
         this.titleService.setTitle('Neuer Kunde');
@@ -142,6 +150,6 @@ export default class CreateKundenComponent implements OnInit {
     }
 
     toString(): String {
-        return 'CreateBuchComponent';
+        return 'CreateKundenComponent';
     }
 }
