@@ -85,6 +85,10 @@ export interface KundeForm extends KundeShared {
     S?: boolean;
     R?: boolean;
     L?: boolean;
+    plz?: string;
+    ort?: string;
+    betrag?: string;
+    waehrung?: string;
 }
 
 /**
@@ -197,10 +201,16 @@ export class Kunde {
             undefined :
             moment(kundeForm.geburtsdatum as string);
 
+        const adresse: Adresse|undefined =
+            new Adresse(kundeForm.plz, kundeForm.ort);
+        const umsatz: Umsatz|undefined =
+            new Umsatz(kundeForm.betrag, kundeForm.waehrung);
+
         const kunde: Kunde = new Kunde(
             kundeForm._id, kundeForm.nachname, kundeForm.email,
             kundeForm.newsletter, geburtsdatumMoment, kundeForm.homepage,
-            kundeForm.geschlecht, kundeForm.username);
+            kundeForm.geschlecht, kundeForm.username, interessen, umsatz,
+            adresse);
         console.log('Kunde.fromForm(): kunde=', kunde);
         return kunde;
     }
