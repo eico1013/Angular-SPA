@@ -1,0 +1,142 @@
+{ 
+    "_id" : ObjectId("000000000000000000000000"), 
+    "_class" : "de.hska.kunden.entity.Kunde", 
+    "nachname" : "Admin", 
+    "email" : "admin@hska.de", 
+    "newsletter" : true, 
+    "geburtsdatum" : ISODate("2016-01-30T23:00:00.000+0000"), 
+    "umsatz" : {
+        "betrag" : "0", 
+        "waehrung" : "EUR"
+    }, 
+    "homepage" : "https://www.hska.de", 
+    "geschlecht" : "W", 
+    "interessen" : [
+        "L"
+    ], 
+    "adresse" : {
+        "plz" : "76133", 
+        "ort" : "Karlsruhe"
+    }, 
+    "username" : "admin", 
+    "version" : NumberInt(0), 
+    "erzeugt" : ISODate("2017-01-03T20:22:50.256+0000"), 
+    "aktualisiert" : ISODate("2017-01-03T20:22:50.256+0000")
+}
+{ 
+    "_id" : ObjectId("000000000000000000000001"), 
+    "_class" : "de.hska.kunden.entity.Kunde", 
+    "nachname" : "Alpha", 
+    "email" : "alpha@hska.edu", 
+    "newsletter" : true, 
+    "geburtsdatum" : ISODate("2015-12-31T23:00:00.000+0000"), 
+    "umsatz" : {
+        "betrag" : "10", 
+        "waehrung" : "USD"
+    }, 
+    "homepage" : "https://www.hska.edu", 
+    "geschlecht" : "M", 
+    "interessen" : [
+        "L", 
+        "S"
+    ], 
+    "adresse" : {
+        "plz" : "76133", 
+        "ort" : "Karlsruhe"
+    }, 
+    "username" : "alpha1", 
+    "version" : NumberInt(0), 
+    "erzeugt" : ISODate("2017-01-03T20:22:50.385+0000"), 
+    "aktualisiert" : ISODate("2017-01-03T20:22:50.385+0000")
+}
+{ 
+    "_id" : ObjectId("000000000000000000000002"), 
+    "_class" : "de.hska.kunden.entity.Kunde", 
+    "nachname" : "Alpha", 
+    "email" : "alpha@hska.ch", 
+    "newsletter" : true, 
+    "geburtsdatum" : ISODate("2016-01-01T23:00:00.000+0000"), 
+    "umsatz" : {
+        "betrag" : "20", 
+        "waehrung" : "CHF"
+    }, 
+    "homepage" : "https://www.hska.ch", 
+    "geschlecht" : "W", 
+    "interessen" : [
+        "R", 
+        "S"
+    ], 
+    "adresse" : {
+        "plz" : "76133", 
+        "ort" : "Karlsruhe"
+    }, 
+    "username" : "alpha2", 
+    "version" : NumberInt(0), 
+    "erzeugt" : ISODate("2017-01-03T20:22:50.389+0000"), 
+    "aktualisiert" : ISODate("2017-01-03T20:22:50.389+0000")
+}
+{ 
+    "_id" : ObjectId("000000000000000000000003"), 
+    "_class" : "de.hska.kunden.entity.Kunde", 
+    "nachname" : "Alpha", 
+    "email" : "alpha@hska.uk", 
+    "newsletter" : true, 
+    "geburtsdatum" : ISODate("2016-01-02T23:00:00.000+0000"), 
+    "umsatz" : {
+        "betrag" : "30", 
+        "waehrung" : "GBP"
+    }, 
+    "homepage" : "https://www.hska.uk", 
+    "geschlecht" : "M", 
+    "adresse" : {
+        "plz" : "76133", 
+        "ort" : "Karlsruhe"
+    }, 
+    "username" : "alpha3", 
+    "version" : NumberInt(0), 
+    "erzeugt" : ISODate("2017-01-03T20:22:50.394+0000"), 
+    "aktualisiert" : ISODate("2017-01-03T20:22:50.394+0000")
+}
+{ 
+    "_id" : ObjectId("000000000000000000000004"), 
+    "_class" : "de.hska.kunden.entity.Kunde", 
+    "nachname" : "Delta", 
+    "email" : "delta@hska.jp", 
+    "newsletter" : true, 
+    "geburtsdatum" : ISODate("2016-01-03T23:00:00.000+0000"), 
+    "umsatz" : {
+        "betrag" : "40", 
+        "waehrung" : "JPY"
+    }, 
+    "homepage" : "https://www.hska.jp", 
+    "geschlecht" : "W", 
+    "adresse" : {
+        "plz" : "76133", 
+        "ort" : "Karlsruhe"
+    }, 
+    "username" : "delta", 
+    "version" : NumberInt(0), 
+    "erzeugt" : ISODate("2017-01-03T20:22:50.398+0000"), 
+    "aktualisiert" : ISODate("2017-01-03T20:22:50.398+0000")
+}
+{ 
+    "_id" : ObjectId("000000000000000000000005"), 
+    "_class" : "de.hska.kunden.entity.Kunde", 
+    "nachname" : "Epsilon", 
+    "email" : "epsilon@hska.cn", 
+    "newsletter" : true, 
+    "geburtsdatum" : ISODate("2016-01-04T23:00:00.000+0000"), 
+    "geschlecht" : "M", 
+    "interessen" : [
+        "R", 
+        "L"
+    ], 
+    "adresse" : {
+        "plz" : "76133", 
+        "ort" : "Karlsruhe"
+    }, 
+    "username" : "epsilon", 
+    "version" : NumberInt(0), 
+    "erzeugt" : ISODate("2017-01-03T20:22:50.403+0000"), 
+    "aktualisiert" : ISODate("2017-01-03T20:22:50.403+0000")
+}
