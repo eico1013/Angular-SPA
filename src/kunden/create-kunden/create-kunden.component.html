@@ -176,7 +176,7 @@
             </div>
 
             <div class="form-group row"
-                [class.has-danger]="!umsatz.valid && umsatz.touched">
+               [class.has-danger]="!umsatz.valid && umsatz.touched">
                 <label for="umsatzInput" class="col-sm-2 form-control-label">
                     Umsatz *
                 </label>
@@ -184,7 +184,6 @@
                     <div class="input-group">
                         <input id="umsatzInput"
                             placeholder="Umsatz, z.B. 123.45"
-                            required
                             class="form-control form-control-danger"
                             type="number"
                             formControlName="umsatz"/>

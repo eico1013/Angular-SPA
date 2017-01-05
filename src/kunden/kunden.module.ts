@@ -21,7 +21,7 @@ import {Title} from '@angular/platform-browser';
 import ROOT_ROUTES from '../app/root.routes';
 import SharedModule from '../shared/shared.module';
 import CreateKundenComponent from './create-kunden/create-kunden.component';
-import CreateKundenGuard from './create-kunden/create-kunden.component';
+import CreateKundenGuard from './create-kunden/create-kunden.guard';
 
 // import CreateBuchComponent from './create-buch/create-buch.component';
 // import CreateBuchGuard from './create-buch/create-buch.guard';

@@ -22,10 +22,10 @@ import {log} from '../../shared';
 import CreateKundenComponent from './create-kunden.component';
 
 @Injectable()
-export default class CreateKundeGuard implements
+export default class CreateKundenGuard implements
     CanDeactivate<CreateKundenComponent> {
     constructor() {
-        console.log('CreateKundeGuard.constructor()');
+        console.log('CreateKundenGuard.constructor()');
     }
 
     @log
@@ -43,6 +43,6 @@ export default class CreateKundeGuard implements
     }
 
     toString(): String {
-        return 'CreateKundeGuard';
+        return 'CreateKundenGuard';
     }
 }
