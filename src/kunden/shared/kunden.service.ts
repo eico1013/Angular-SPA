@@ -244,13 +244,13 @@ export class KundenService {
         const body: string = JSON.stringify(kunde.toJSON());
         console.log('body=', body);
 
-        // const headers: Headers =
-        //    new Headers({'Content-Type': 'application/json'});
+        const headers: Headers =
+            new Headers({'Content-Type': 'application/json'});
         // const authorization: string|undefined =
         //    this.iamService.getAuthorization();
-        if (isPresent(authorization)) {
-            headers.append('Authorization', authorization as string);
-        }
+        // if (isPresent(authorization)) {
+        //     headers.append('Authorization', authorization as string);
+        // }
         const options: RequestOptionsArgs = {headers: headers};
         console.log('options=', options);
 

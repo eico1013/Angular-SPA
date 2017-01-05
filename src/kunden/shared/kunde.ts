@@ -47,7 +47,7 @@ export interface KundeShared {
     _id?: string;
     nachname?: string|undefined;
     email: string|undefined;
-    newsletter: boolean;
+    newsletter: boolean|undefined;
     geburtsdatum: string|undefined;
     umsatz?: Umsatz;
     homepage: string|undefined;
@@ -307,20 +307,16 @@ export class Kunde {
     //  * @param preis Der neue Preis
     //  * @param rabatt Der neue Rabatt
     //  */
-    updateStammdaten(
-        nachname: string, email: string, newsletter: boolean,
-        umsatz: Umsatz|undefined, homepage: string,
-        geschlecht: string|undefined, username: string|undefined,
-        adresse: Adresse|undefined): void {
+    updateStammdaten(nachname: string, email: string, homepage: string): void {
         this.nachname = nachname;
         this.email = email;
-        this.newsletter = newsletter;
-
-        // this.geburtsdatum = geburtsdatum;
-        this.umsatz = umsatz;
         this.homepage = homepage;
-        this.geschlecht = geschlecht;
-        this.username = username;
+        // this.rating = rating;
+        // this.ratingArray = [];
+        // _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
+        // this.datum = datum;
+        // this.preis = preis;
+        // this.rabatt = rabatt;
     }
 
     /**
@@ -348,18 +344,21 @@ export class Kunde {
         return tmpInteressen.find((s: string) => s === interesse) !== undefined;
     }
 
-    /**
-     * Aktualisierung der Schlagw&ouml;rter des Buch-Objekts.
-     * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
-     * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
-     */
-    updateInteressen(javascript: boolean, typescript: boolean): void {
+    // /**
+    //  * Aktualisierung der Schlagw&ouml;rter des Buch-Objekts.
+    //  * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
+    //  * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
+    //  */
+    updateInteressen(S: boolean, R: boolean, L: boolean): void {
         this.resetInteressen();
-        if (javascript) {
-            this.addInteresse('L');
+        if (S) {
+            this.addInteresse('S');
         }
-        if (typescript) {
+        if (R) {
             this.addInteresse('R');
+        }
+        if (L) {
+            this.addInteresse('L');
         }
     }
 
@@ -394,7 +393,7 @@ export class Kunde {
     private constructor(
 
         public _id: string|undefined, public nachname: string|undefined,
-        public email: string|undefined, public newsletter: boolean,
+        public email: string|undefined, public newsletter: boolean|undefined,
         public geburtsdatum: Moment|undefined,
         public homepage: string|undefined, public geschlecht: string|undefined,
         public account?: Account|undefined,
@@ -403,11 +402,8 @@ export class Kunde {
         this._id = _id || undefined;
         this.nachname = nachname || undefined;
         this.email = email || undefined;
-<<<<<<< HEAD
-        this.newsletter = newsletter;
-        == == === this.newsletter = newsletter || undefined;
+        this.newsletter = newsletter || undefined;
         this.account = account || undefined;
->>>>>>> master
         this.umsatz = umsatz || undefined;
         this.adresse = adresse || undefined;
         this.geburtsdatum = isPresent(geburtsdatum) ?

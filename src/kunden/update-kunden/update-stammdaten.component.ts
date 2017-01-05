@@ -234,11 +234,9 @@ export default class UpdateStammdatenComponent implements OnInit {
 
         // rating, preis und rabatt koennen im Formular nicht geaendert werden
         this.kunde.updateStammdaten(
-            this.nachname.value, this.email.value, this.kunde.newsletter,
-            this.kunde.umsatz, this.homepage.value, this.kunde.geschlecht,
-            this.kunde.username, this.kunde.adresse);
+            this.nachname.value, this.email.value, this.homepage.value);
         console.log('kunde=', this.kunde);
-
+        console.log('Ausgabe1A');
         const successFn: () => void = () => {
             console.log(`UpdateStammdaten: successFn: path: ${HOME_PATH}`);
             this.router.navigate([HOME_PATH]);

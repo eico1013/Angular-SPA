@@ -35,14 +35,14 @@ import {KundenService} from '../shared/kunden.service';
                 <div class="offset-sm-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" formControlName="javascript">
-                            JavaScript
+                            <input type="checkbox" formControlName="r">
+                            R
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" formControlName="typescript">
-                            TypeScript
+                            <input type="checkbox" formControlName="l">
+                            L
                         </label>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ import {KundenService} from '../shared/kunden.service';
                     <button class="btn btn-primary" (click)="onUpdate()"
                             [disabled]="form.pristine || !form.valid">
                         <i class="fa fa-check"></i>
-                        <span class="ml-1">Schlagw&ouml;rter aktualisieren</span>
+                        <span class="ml-1">Interessen aktualisieren</span>
                     </button>
                 </div>
             </div>
@@ -65,8 +65,9 @@ export default class UpdateInteressenComponent implements OnInit {
     @Input() kunde: Kunde;
 
     form: FormGroup;
-    javascript: FormControl;
-    typescript: FormControl;
+    S: FormControl;
+    R: FormControl;
+    L: FormControl;
 
     constructor(
         private readonly formBuilder: FormBuilder,
@@ -84,15 +85,18 @@ export default class UpdateInteressenComponent implements OnInit {
         console.log('kunde=', this.kunde);
 
         // Definition und Vorbelegung der Eingabedaten (hier: Checkbox)
-        const hasJavaScript: boolean = this.kunde.hasInteresse('R');
-        this.javascript = new FormControl(hasJavaScript);
-        const hasTypeScript: boolean = this.kunde.hasInteresse('L');
-        this.typescript = new FormControl(hasTypeScript);
+        const hasR: boolean = this.kunde.hasInteresse('R');
+        this.R = new FormControl(hasR);
+        const hasL: boolean = this.kunde.hasInteresse('L');
+        this.L = new FormControl(hasL);
+        const hasS: boolean = this.kunde.hasInteresse('S');
+        this.S = new FormControl(hasS);
 
         this.form = this.formBuilder.group({
             // siehe ngFormControl innerhalb von @Component({template: `...`})
-            javascript: this.javascript,
-            typescript: this.typescript
+            S: this.S,
+            R: this.R,
+            L: this.L
         });
     }
 
@@ -114,8 +118,7 @@ export default class UpdateInteressenComponent implements OnInit {
             return;
         }
 
-        this.kunde.updateInteressen(
-            this.javascript.value, this.typescript.value);
+        this.kunde.updateInteressen(this.S.value, this.R.value, this.L.value);
         console.log('kunde=', this.kunde);
 
         const successFn: () => void = () => {
