@@ -110,7 +110,7 @@ import {KundenService} from '../shared/kunden.service';
                                 </a>
                             </td>
                             <td>
-                                <a (click)="onRemove(b)"
+                                <a (click)="onRemove(k)"
                                 data-toggle="tooltip"
                                    title="Entfernen">
                                     <i class="fa fa-remove"></i>

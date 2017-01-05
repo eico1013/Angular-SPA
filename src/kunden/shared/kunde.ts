@@ -68,6 +68,7 @@ export interface KundeServer extends KundeShared {
     // rating: number|undefined;
     interessen?: Array<string>|undefined;
     links?: Array<string>;
+    _links?: Array<string>;
 }
 
 /**
@@ -127,22 +128,41 @@ export class Kunde {
         }
 
 
-        if (kundeServer.links === undefined) {
-            kundeServer.links = [];
-            console.log('Links war undefined');
+        if (kundeServer.links !== undefined) {
+            console.log('Links wird aufgerufen');
+
+            var linksObject: Object;
+
+            linksObject = kundeServer.links[0];
+
+            var linksJSON: string = JSON.stringify(linksObject);
+            var linksArray: Array<string> = linksJSON.split('/');
+            var linksString: string = linksArray[linksArray.length - 1];
+
+
+
+            kundeServer._id = linksString.substring(0, linksString.length - 2);
         }
 
-        var linksObject: Object;
+        if (kundeServer._links !== undefined) {
+            console.log('_Links wird aufgerufen');
 
-        linksObject = kundeServer.links[0];
+            var _linksObject: Object;
 
-        var linksJSON: string = JSON.stringify(linksObject);
-        var linksArray: Array<string> = linksJSON.split('/');
-        var linksString: string = linksArray[linksArray.length - 1];
+            _linksObject = kundeServer._links;
 
+            var _linksJSON: string = JSON.stringify(_linksObject);
 
+            var _linksJSONParse: any = JSON.parse(_linksJSON);
 
-        kundeServer._id = linksString.substring(0, linksString.length - 2);
+            var _linksSelfHref: string = _linksJSONParse.self.href;
+
+            var selfLinkGesplittet: Array<string> = _linksSelfHref.split('/');
+
+            kundeServer._id = selfLinkGesplittet[selfLinkGesplittet.length - 1];
+
+            console.log(kundeServer._id);
+        }
 
 
         const kunde: Kunde = new Kunde(
@@ -185,15 +205,15 @@ export class Kunde {
         return kunde;
     }
 
-    // // http://momentjs.com
-    // get datumFormatted(): string|undefined {
-    //     let result: string|undefined = undefined;
-    //     if (isPresent(this.datum)) {
-    //         const datum: Moment = this.datum as Moment;
-    //         result = datum.format('Do MMM YYYY');
-    //     }
-    //     return result;
-    // }
+    // http://momentjs.com
+    get datumFormatted(): string|undefined {
+        let result: string|undefined = undefined;
+        if (isPresent(this.geburtsdatum)) {
+            const datum: Moment = this.geburtsdatum as Moment;
+            result = datum.format('Do MMM YYYY');
+        }
+        return result;
+    }
 
     // get datumFromNow(): string|undefined {
     //     let result: string|undefined = undefined;

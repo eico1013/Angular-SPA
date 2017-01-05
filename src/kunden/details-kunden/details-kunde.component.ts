@@ -48,13 +48,13 @@ import {KundenService} from '../shared/kunden.service';
 
             <!-- http://v4-alpha.getbootstrap.com/components/navs/#tabs -->
             <ul class="nav nav-tabs mt-2">
-                <--! <li class="nav-item">
-                    <a class="nav-link active" href="#interessen"
+                <li class="nav-item">
+                    <a class="nav-link active" href="#stammdaten"
                        data-toggle="tab">
-                        Interessen
+                        Kundendaten
                     </a>
-                </li> -->
-                <li class="nav-item" *ngIf="buch.hasInteressen()">
+                </li>
+                <li class="nav-item" *ngIf="kunde.hasInteressen()">
                     <a class="nav-link" href="#interessen"
                        data-toggle="tab">
                         Interessen
@@ -63,13 +63,14 @@ import {KundenService} from '../shared/kunden.service';
             </ul>
 
             <div class="tab-content">
-                <--! <div class="tab-pane fade in active" id="interessen">
+                 <div class="tab-pane fade in active" id="stammdaten">
                     <div class="mt-1">
-                       
+                        <my-details-stammdaten [kunde]="kunde">
+                        </my-details-stammdaten>   
                     </div>
-                </div> -->
+                </div>
                 <div class="tab-pane fade" id="interessen"
-                    *ngIf="buch.hasInteressen()">
+                    *ngIf="kunde.hasInteressen()">
                     <div class="mt-1">
                         <my-details-interessen [values]="kunde.interessen">
                         </my-details-interessen>
@@ -130,7 +131,7 @@ export default class DetailsKundeComponent implements OnInit {
         const next: (kunde: Kunde) => void = (kunde) => {
             this.waiting = false;
             this.kunde = kunde;
-            console.log('DetailsKundeComponent.buch=', this.kunde);
+            console.log('DetailsKundeComponent.kunde=', this.kunde);
 
             const titel: string =
                 this.kunde === null ? 'Details' : `Details ${this.kunde._id}`;
@@ -160,7 +161,7 @@ export default class DetailsKundeComponent implements OnInit {
                     this.errorMsg = 'Ein Fehler ist aufgetreten.';
                     break;
             }
-            console.log(`DetailsBuchComponent.errorMsg: ${this.errorMsg}`);
+            console.log(`DetailsKundeComponent.errorMsg: ${this.errorMsg}`);
 
             this.titleService.setTitle('Fehler');
         };
