@@ -18,7 +18,8 @@
 import {EventEmitter, Inject, Injectable} from '@angular/core';
 // Bereitgestellt durch das HttpModule (s. Re-Export im SharedModule)
 // HttpModule enthaelt nur Services, keine Komponenten
-import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
+// import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
+import {Http, Response, URLSearchParams} from '@angular/http';
 
 // import {ChartConfig, ChartDataSet} from 'chart.js';
 // import * as _ from 'lodash';
@@ -276,11 +277,12 @@ export class KundenService {
     remove(
         kunde: Kunde, successFn: () => void|undefined,
         errorFn: (status: number) => void): void {
-        const uri: string = `${this.baseUriKunden}/${kunde._id}`;
-        const headers: Headers =
-            new Headers({'Authorization': this.iamService.getAuthorization()});
-        const options: RequestOptionsArgs = {headers: headers};
-        console.log('options=', options);
+        const uri: string = `${this.baseUriKunden}${kunde._id}`;
+        console.log('uridelete=', uri);
+        // const headers: Headers =
+        //     new Headers({'Authorization': 'Basic YWRtaW46cA=='});
+        // const options: RequestOptionsArgs = {headers: headers};
+        // console.log('options=', options);
 
         const nextFn: ((response: Response) => void) = (response) => {
             if (isPresent(successFn)) {
@@ -295,7 +297,7 @@ export class KundenService {
             };
 
 
-        this.http.delete(uri, options).subscribe(nextFn, errorFnDelete);
+        this.http.delete(uri).subscribe(nextFn, errorFnDelete);
     }
 
     // // http://www.sitepoint.com/15-best-javascript-charting-libraries
