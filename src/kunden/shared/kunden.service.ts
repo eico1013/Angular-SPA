@@ -19,13 +19,14 @@ import {EventEmitter, Inject, Injectable} from '@angular/core';
 // Bereitgestellt durch das HttpModule (s. Re-Export im SharedModule)
 // HttpModule enthaelt nur Services, keine Komponenten
 import {Headers, Http, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
+// import {Http, Response, URLSearchParams} from '@angular/http';
 
 // import {ChartConfig, ChartDataSet} from 'chart.js';
 // import * as _ from 'lodash';
 // Moment exportiert den Namespace moment und die gleichnamige Function:
 // http://stackoverflow.com/questions/35254524/using-moment-js-in-angular-2-typescript-application#answer-35255412
-// import * as moment_ from 'moment';
-// import {Moment} from 'moment';
+import * as moment_ from 'moment';
+import {Moment} from 'moment';
 
 import {IamService} from '../../iam/iam.service';
 import {BASE_URI2, isBlank, isEmpty, isPresent, log, PATH_KUNDEN} from '../../shared';
@@ -33,7 +34,7 @@ import {BASE_URI2, isBlank, isEmpty, isPresent, log, PATH_KUNDEN} from '../../sh
 import DiagrammService from '../../shared/diagramm.service';
 import {Kunde, KundeForm, KundeServer} from './index';
 
-// const moment: (date: Date) => Moment = (<any>moment_)['default'];
+const moment: (date: Date) => Moment = (<any>moment_)['default'];
 
 // Methoden der Klasse Http
 //  * get(url, options) – HTTP GET request
@@ -117,10 +118,6 @@ export class KundenService {
         const uri: string = this.baseUriKunden;
         console.log(`KundenService.find(): uri=${uri}`);
 
-        // const headers: Headers =
-        //     new Headers({'Content-Access-Control-Allow-Origin': '*'});
-        // console.log(headers);
-
         const nextFn: (response: Response) => void = (response) => {
             console.log('KundenService.find(): nextFn()');
             let kunden: Array<Kunde> = this.responseToArrayKunde(response);
@@ -191,48 +188,47 @@ export class KundenService {
         this.http.get(uri).subscribe(nextFn, errorFn);
     }
 
-    // /**
-    //  * Ein neues Buch anlegen
-    //  * @param neuesBuch Das JSON-Objekt mit dem neuen Buch
-    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
-    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
-    //  */
-    // @log
-    // save(
-    //     neuesBuch: Buch, successFn: (location: string|undefined) => void,
-    //     errorFn: (status: number, text: string) => void): void {
-    //     neuesBuch.datum = moment(new Date());
+    /**
+     * Ein neues Buch anlegen
+     * @param neuesBuch Das JSON-Objekt mit dem neuen Buch
+     * @param successFn Die Callback-Function fuer den Erfolgsfall
+     * @param errorFn Die Callback-Function fuer den Fehlerfall
+     */
+    @log
+    save(
+        neuerKunde: Kunde, successFn: (location: string|undefined) => void,
+        errorFn: (status: number, text: string) => void): void {
+        neuerKunde.geburtsdatum = moment(new Date());
 
-    //     const uri: string = this.baseUriBuecher;
-    //     const body: string = JSON.stringify(neuesBuch.toJSON());
-    //     console.log('body=', body);
+        const uri: string = this.baseUriKunden;
+        const body: string = JSON.stringify(neuerKunde.toJSON());
+        console.log('body=', body);
 
-    //     const headers: Headers =
-    //         new Headers({'Content-Type': 'application/json'});
-    //     const authorization: string|undefined =
-    //         this.iamService.getAuthorization();
-    //     if (isPresent(authorization)) {
-    //         headers.append('Authorization', authorization as string);
-    //     }
-    //     const options: RequestOptionsArgs = {headers: headers};
-    //     console.log('options=', options);
+        const headers: Headers =
+            new Headers({'Content-Type': 'application/json'});
+        const authorization: string|undefined =
+            this.iamService.getAuthorization();
+        if (isPresent(authorization)) {
+            headers.append('Authorization', authorization as string);
+        }
+        const options: RequestOptionsArgs = {headers: headers};
+        console.log('options=', options);
 
-    //     const nextFn: ((response: Response) => void) = (response) => {
-    //         if (response.status === 201) {
-    //             // TODO Das Response-Objekt enthaelt im Header NICHT
-    //             "Location"
-    //             successFn(undefined);
-    //         }
-    //     };
-    //     // async. Error-Callback statt sync. try/catch
-    //     const errorFnPost: ((errResponse: Response) => void) =
-    //         (errResponse) => {
-    //             if (isPresent(errorFn)) {
-    //                 errorFn(errResponse.status, errResponse.text());
-    //             }
-    //         };
-    //     this.http.post(uri, body, options).subscribe(nextFn, errorFnPost);
-    // }
+        const nextFn: ((response: Response) => void) = (response) => {
+            if (response.status === 201) {
+                // TODO Das Response-Objekt enthaelt im Header NICHT "Location"
+                successFn(undefined);
+            }
+        };
+        // async. Error-Callback statt sync. try/catch
+        const errorFnPost: ((errResponse: Response) => void) =
+            (errResponse) => {
+                if (isPresent(errorFn)) {
+                    errorFn(errResponse.status, errResponse.text());
+                }
+            };
+        this.http.post(uri, body, options).subscribe(nextFn, errorFnPost);
+    }
 
     /**
      * Ein vorhandenes Buch aktualisieren
@@ -279,11 +275,12 @@ export class KundenService {
     remove(
         kunde: Kunde, successFn: () => void|undefined,
         errorFn: (status: number) => void): void {
-        const uri: string = `${this.baseUriKunden}/${kunde._id}`;
-        const headers: Headers =
-            new Headers({'Authorization': this.iamService.getAuthorization()});
-        const options: RequestOptionsArgs = {headers: headers};
-        console.log('options=', options);
+        const uri: string = `${this.baseUriKunden}${kunde._id}`;
+        console.log('uridelete=', uri);
+        // const headers: Headers =
+        //     new Headers({'Authorization': 'Basic YWRtaW46cA=='});
+        // const options: RequestOptionsArgs = {headers: headers};
+        // console.log('options=', options);
 
         const nextFn: ((response: Response) => void) = (response) => {
             if (isPresent(successFn)) {
@@ -298,7 +295,7 @@ export class KundenService {
             };
 
 
-        this.http.delete(uri, options).subscribe(nextFn, errorFnDelete);
+        this.http.delete(uri).subscribe(nextFn, errorFnDelete);
     }
 
     // // http://www.sitepoint.com/15-best-javascript-charting-libraries

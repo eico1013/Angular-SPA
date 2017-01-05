@@ -21,13 +21,13 @@ import {RouterModule, Routes} from '@angular/router';
 import CreateBuchComponent from '../buecher/create-buch/create-buch.component';
 import CreateBuchGuard from '../buecher/create-buch/create-buch.guard';
 import DetailsBuchComponent from '../buecher/details-buch/details-buch.component';
-import BalkendiagrammComponent from '../buecher/diagramme/balkendiagramm.component';
-import LiniendiagrammComponent from '../buecher/diagramme/liniendiagramm.component';
-import TortendiagrammComponent from '../buecher/diagramme/tortendiagramm.component';
 import SucheBuecherComponent from '../buecher/suche-buecher/suche-buecher.component';
 import UpdateBuchComponent from '../buecher/update-buch/update-buch.component';
 import HomeComponent from '../home/home.component';
 import AdminGuard from '../iam/admin.guard';
+import CreateKundenComponent from '../kunden/create-kunden/create-kunden.component';
+import CreateKundenGuard from '../kunden/create-kunden/create-kunden.guard';
+import DetailsKundeComponent from '../kunden/details-kunden/details-kunde.component';
 import SucheKundenComponent from '../kunden/suche-kunden/suche-kunden.component';
 
 export const HOME_PATH: string = '';
@@ -49,8 +49,8 @@ const routes: Routes = [
         canActivate: [AdminGuard]
     },
     // id als Pfad-Parameter
-    {path: `${DETAILS_KUNDE_PATH}/:id`, component: DetailsBuchComponent}, {
-        path: 'updateBuch/:id',
+    {path: `${DETAILS_KUNDE_PATH}/:id`, component: DetailsKundeComponent}, {
+        path: 'updateKunde/:id',
         component: UpdateBuchComponent,
         canActivate: [AdminGuard]
     },
@@ -61,20 +61,12 @@ const routes: Routes = [
       canDeactivate: [CreateBuchGuard]
     },
     {
-      path: 'balkendiagramm',
-      component: BalkendiagrammComponent,
-      canActivate: [AdminGuard]
+      path: 'createKunden',
+      component: CreateKundenComponent,
+      canActivate: [AdminGuard],
+      canDeactivate: [CreateKundenGuard]
     },
-    {
-      path: 'liniendiagramm',
-      component: LiniendiagrammComponent,
-      canActivate: [AdminGuard]
-    },
-    {
-      path: 'tortendiagramm',
-      component: TortendiagrammComponent,
-      canActivate: [AdminGuard]
-    }
+
 
     // Weiterer Pfad fuer die Produktion.
     // In der Entwicklung ist es einfacher, bei FALSCHEN Pfaden die Fehler sehen

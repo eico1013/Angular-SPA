@@ -38,7 +38,7 @@ export const BASE_URI2: string =
 export const BASE_URI: string = `${SCHEME}://${SERVERNAME}:${PORT}${BASE_PATH}`;
 
 /**
- * Pfad f&uuml;r den Zugriff auf B&uuml;cher, ausgehend von der Basis-URI.
+ * Pfad f&uuml;r den Zugriff auf Kunden, ausgehend von der Basis-URI.
  */
 export const PATH_BUECHER: string = `buecher`;
 

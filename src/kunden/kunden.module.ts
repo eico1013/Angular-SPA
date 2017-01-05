@@ -20,14 +20,19 @@ import {Title} from '@angular/platform-browser';
 
 import ROOT_ROUTES from '../app/root.routes';
 import SharedModule from '../shared/shared.module';
+import CreateKundenComponent from './create-kunden/create-kunden.component';
+import CreateKundenGuard from './create-kunden/create-kunden.guard';
 
 // import CreateBuchComponent from './create-buch/create-buch.component';
 // import CreateBuchGuard from './create-buch/create-buch.guard';
 // import DetailsBuchComponent from './details-buch/details-buch.component';
-// import DetailsSchlagwoerterComponent from
-// './details-buch/details-schlagwoerter.component';
+import DetailsKundeComponent from './details-kunden/details-kunde.component';
+import DetailsInteressenComponent from
+'./details-kunden/details-interessen.component';
 // import DetailsStammdatenComponent from
 // './details-buch/details-stammdaten.component';
+import DetailsStammdatenComponent from
+'./details-kunden/details-stammdaten.component';
 // import BalkendiagrammComponent from './diagramme/balkendiagramm.component';
 // import LiniendiagrammComponent from './diagramme/liniendiagramm.component';
 // import TortendiagrammComponent from './diagramme/tortendiagramm.component';
@@ -48,14 +53,18 @@ import SuchkriterienComponent from './suche-kunden/suchkriterien.component';
 // './update-buch/update-stammdaten.component';
 
 const komponentenExport: Array<Type<any>> = [
-    /*CreateBuchComponent, DetailsBuchComponent, BalkendiagrammComponent,
+    CreateKundenComponent, /*DetailsBuchComponent, BalkendiagrammComponent,
     LiniendiagrammComponent, TortendiagrammComponent, */
-    SucheKundenComponent /*,
-UpdateBuchComponent*/
+    SucheKundenComponent,  /*,
+ UpdateBuchComponent*/
+    /*CreateBuchComponent,*/ DetailsKundeComponent, /* BalkendiagrammComponent,
+    LiniendiagrammComponent, TortendiagrammComponent, */
+    SucheKundenComponent                            /*,
+                           UpdateBuchComponent*/
 ];
 
 const komponentenIntern: Array<Type<any>> = [
-    /*DetailsSchlagwoerterComponent, DetailsStammdatenComponent,*/
+    DetailsInteressenComponent, DetailsStammdatenComponent,
     GefundeneKundenComponent, SucheKundenComponent, SuchergebnisComponent,
     SuchkriterienComponent /*, UpdateSchlagwoerterComponent,
      UpdateStammdatenComponent*/
@@ -71,7 +80,7 @@ const komponentenIntern: Array<Type<any>> = [
     // BuecherService mit eigenem DI-Context innerhalb des Moduls, d.h.
     // es kann in anderen Moduln eine eigene Instanz von BuecherService geben.
     // Title als Singleton aus dem SharedModule
-    providers: [KundenService, /*CreateBuchGuard, */ Title],
+    providers: [KundenService, CreateKundenGuard, Title],
     exports: [...komponentenExport]
 })
 export default class KundenModule {

@@ -49,7 +49,7 @@ import {log} from '../shared';
                 </div>
 
                 <div class="list-group-item" *ngIf="isAdmin">
-                    <a [routerLink]="'/createBuch'">
+                    <a [routerLink]="'/createKunden'">
                         <i class="fa fa-book"></i>
                         <span class="ml-1">Neuer Kunde</span>
                     </a>
