@@ -44,8 +44,8 @@ import {KundenService} from '../shared/kunden.service';
                         Stammdaten
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="kunde.schlagwoerter.length !== 0">
-                    <a class="nav-link" href="#schlagwoerter"
+                <li class="nav-item" *ngIf="kunde.interessen.length !== 0">
+                    <a class="nav-link" href="#interessen"
                        data-toggle="tab">
                         Schlagw&ouml;rter
                     </a>
@@ -61,8 +61,8 @@ import {KundenService} from '../shared/kunden.service';
                 </div>
                 <div class="tab-pane fade" id="schlagwoerter">
                     <div class="mt-1">
-                        <my-update-schlagwoerter [kunde]="kunde">
-                        </my-update-schlagwoerter>
+                        <my-update-interessen [kunde]="kunde">
+                        </my-update-interessen>
                     </div>
                 </div>
             </div>

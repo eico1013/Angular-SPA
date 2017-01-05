@@ -29,10 +29,6 @@ import {isBlank, isEmpty, isPresent} from '../../shared';
 import {Adresse} from './adresse';
 import {Umsatz} from './umsatz';
 
-<<<<<<< HEAD
-import {isBlank, /* isEmpty,*/ isPresent} from '../../shared';
-=======
->>>>>>> master
 
 // const MIN_RATING: number = 0;
 // const MAX_RATING: number = 5;
@@ -49,7 +45,7 @@ export interface KundeShared {
     _id?: string;
     nachname?: string|undefined;
     email: string|undefined;
-    newsletter: boolean|undefined;
+    newsletter: boolean;
     geburtsdatum: string|undefined;
     umsatz?: Umsatz;
     homepage: string|undefined;
@@ -70,13 +66,9 @@ export interface KundeShared {
  */
 export interface KundeServer extends KundeShared {
     // rating: number|undefined;
-<<<<<<< HEAD
-    schlagwoerter?: Array<string>|undefined;
-=======
     interessen?: Array<string>|undefined;
     links?: Array<string>;
     _links?: Array<string>;
->>>>>>> master
 }
 
 /**
@@ -88,16 +80,11 @@ export interface KundeServer extends KundeShared {
  */
 export interface KundeForm extends KundeShared {
     // rating: string;
-<<<<<<< HEAD
-    javascript?: boolean;
-    typescript?: boolean;
-=======
     // javascript?: boolean;
     // typescript?: boolean;
     S?: boolean;
     R?: boolean;
     L?: boolean;
->>>>>>> master
 }
 
 /**
@@ -180,15 +167,9 @@ export class Kunde {
 
         const kunde: Kunde = new Kunde(
             kundeServer._id, kundeServer.nachname, kundeServer.email,
-<<<<<<< HEAD
-            kundeServer.newsletter, kundeServer.geburtsdatum,
-            kundeServer.homepage, kundeServer.geschlecht,
-            kundeServer.schlagwoerter, kundeServer.username);
-=======
             kundeServer.newsletter, geburtsdatum, kundeServer.homepage,
             kundeServer.geschlecht, kundeServer.username,
             kundeServer.interessen, umsatz, adresse);
->>>>>>> master
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
     }
@@ -216,32 +197,10 @@ export class Kunde {
             undefined :
             moment(kundeForm.geburtsdatum as string);
 
-<<<<<<< HEAD
-    /**
-     * Ein Buch-Objekt mit JSON-Daten erzeugen, die von einem Formular
-     * kommen.
-     * @param buch JSON-Objekt mit Daten vom Formular
-     * @return Das initialisierte Buch-Objekt
-     */
-    static fromForm(kundeForm: KundeForm): Kunde {
-        const schlagwoerter: Array<string> = [];
-        if (kundeForm.javascript) {
-            schlagwoerter.push('JAVASCRIPT');
-        }
-        if (kundeForm.typescript) {
-            schlagwoerter.push('TYPESCRIPT');
-        }
-
-        const kunde: Kunde = new Kunde(
-            kundeForm._id, kundeForm.nachname, kundeForm.email,
-            kundeForm.newsletter, kundeForm.geburtsdatum, kundeForm.homepage,
-            kundeForm.geschlecht, schlagwoerter, kundeForm.username);
-=======
         const kunde: Kunde = new Kunde(
             kundeForm._id, kundeForm.nachname, kundeForm.email,
             kundeForm.newsletter, geburtsdatumMoment, kundeForm.homepage,
             kundeForm.geschlecht, kundeForm.username);
->>>>>>> master
         console.log('Kunde.fromForm(): kunde=', kunde);
         return kunde;
     }
@@ -318,40 +277,32 @@ export class Kunde {
     //  * @param preis Der neue Preis
     //  * @param rabatt Der neue Rabatt
     //  */
-    // updateStammdaten(
-    //     titel: string, art: BuchArt, verlag: Verlag, rating: number,
-    //     datum: Moment|undefined, preis: number|undefined,
-    //     rabatt: number|undefined): void {
-    //     this.titel = titel;
-    //     this.art = art;
-    //     this.verlag = verlag;
-    //     this.rating = rating;
-    //     this.ratingArray = [];
-    //     _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
-    //     this.datum = datum;
-    //     this.preis = preis;
-    //     this.rabatt = rabatt;
-    // }
+    updateStammdaten(
+        nachname: string, email: string, newsletter: boolean,
+        umsatz: Umsatz|undefined, homepage: string,
+        geschlecht: string|undefined, username: string|undefined,
+        adresse: Adresse|undefined): void {
+        this.nachname = nachname;
+        this.email = email;
+        this.newsletter = newsletter;
+
+        // this.geburtsdatum = geburtsdatum;
+        this.umsatz = umsatz;
+        this.homepage = homepage;
+        this.geschlecht = geschlecht;
+        this.username = username;
+    }
 
     /**
      * Abfrage, ob es zum Buch auch Schlagw&ouml;rter gibt.
      * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
      */
     hasInteressen(): boolean {
-<<<<<<< HEAD
-        if (isBlank(this.schlagwoerter)) {
-            return false;
-        }
-        const tmpSchlagwoerter: Array<string> =
-            this.schlagwoerter as Array<string>;
-        return tmpSchlagwoerter.length !== 0;
-=======
         if (isBlank(this.interessen)) {
             return false;
         }
         const tmpInteressen: Array<string> = this.interessen as Array<string>;
         return tmpInteressen.length !== 0;
->>>>>>> master
     }
 
     /**
@@ -359,23 +310,12 @@ export class Kunde {
      * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
      * @return true, falls es das Schlagwort gibt. Sonst false.
      */
-<<<<<<< HEAD
-    hasInteresse(schlagwort: string): boolean {
-        if (isBlank(this.schlagwoerter)) {
-            return false;
-        }
-        const tmpSchlagwoerter: Array<string> =
-            this.schlagwoerter as Array<string>;
-        return tmpSchlagwoerter.find((s: string) => s === schlagwort)
-            !== undefined;
-=======
     hasInteresse(interesse: string): boolean {
         if (isBlank(this.interessen)) {
             return false;
         }
         const tmpInteressen: Array<string> = this.interessen as Array<string>;
         return tmpInteressen.find((s: string) => s === interesse) !== undefined;
->>>>>>> master
     }
 
     /**
@@ -384,12 +324,12 @@ export class Kunde {
      * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
      */
     updateInteressen(javascript: boolean, typescript: boolean): void {
-        this.resetSchlagwoerter();
+        this.resetInteressen();
         if (javascript) {
-            this.addSchlagwort('JAVASCRIPT');
+            this.addInteresse('L');
         }
         if (typescript) {
-            this.addSchlagwort('TYPESCRIPT');
+            this.addInteresse('R');
         }
     }
 
@@ -410,13 +350,8 @@ export class Kunde {
             geburtsdatum: geburtsdatum,
             homepage: this.homepage,
             geschlecht: this.geschlecht,
-<<<<<<< HEAD
-            schlagwoerter: this.schlagwoerter,
-            username: this.username
-=======
             username: this.username,
             interessen: this.interessen
->>>>>>> master
         };
     }
 
@@ -427,32 +362,16 @@ export class Kunde {
     private constructor(
 
         public _id: string|undefined, public nachname: string|undefined,
-        public email: string|undefined, public newsletter: boolean|undefined,
+        public email: string|undefined, public newsletter: boolean,
         public geburtsdatum: Moment|undefined,
         public homepage: string|undefined, public geschlecht: string|undefined,
-<<<<<<< HEAD
-        public schlagwoerter: Array<string>|undefined,
-        public username: string|undefined) {
-=======
         public username: string|undefined,
         public interessen?: Array<string>|undefined,
         public umsatz?: Umsatz|undefined, public adresse?: Adresse|undefined) {
->>>>>>> master
         this._id = _id || undefined;
         this.nachname = nachname || undefined;
         this.email = email || undefined;
-        this.newsletter = newsletter || undefined;
-<<<<<<< HEAD
-        this.geburtsdatum = geburtsdatum || undefined;
-
-        if (isBlank(schlagwoerter)) {
-            this.schlagwoerter = [];
-        } else {
-            const tmpSchlagwoerter: Array<string> =
-                schlagwoerter as Array<string>;
-            this.schlagwoerter = tmpSchlagwoerter;
-        }
-=======
+        this.newsletter = newsletter;
         this.umsatz = umsatz || undefined;
         this.adresse = adresse || undefined;
         this.geburtsdatum = isPresent(geburtsdatum) ?
@@ -466,37 +385,20 @@ export class Kunde {
             this.interessen = tmpinteressen;
         }
 
->>>>>>> master
         // _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
         // _.times(MAX_RATING - rating, () => this.ratingArray.push(false));
-        this.email = email || undefined;
+        // this.email = email || undefined;
     }
 
-<<<<<<< HEAD
-    private resetSchlagwoerter(): void {
-        this.schlagwoerter = [];
+    private resetInteressen(): void {
+        this.interessen = [];
     }
 
-    private addSchlagwort(schlagwort: string): void {
-        if (isBlank(this.schlagwoerter)) {
-            this.schlagwoerter = [];
+    private addInteresse(interesse: string): void {
+        if (isBlank(this.interessen)) {
+            this.interessen = [];
         }
-        const tmpSchlagwoerter: Array<string> =
-            this.schlagwoerter as Array<string>;
-        tmpSchlagwoerter.push(schlagwort);
+        const tmpInteressen: Array<string> = this.interessen as Array<string>;
+        tmpInteressen.push(interesse);
     }
-=======
-    // private resetInteressen(): void {
-    //     this.interessen = [];
-    // }
-
-    // private addInteresse(interesse: string): void {
-    //     if (isBlank(this.interessen)) {
-    //         this.interessen = [];
-    //     }
-    //     const tmpInteressen: Array<string> =
-    //         this.interessen as Array<string>;
-    //     tmpInteressen.push(interesse);
-    // }
->>>>>>> master
 }

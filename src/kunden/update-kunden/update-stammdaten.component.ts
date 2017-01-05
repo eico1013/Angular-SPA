@@ -21,8 +21,8 @@ import {Router} from '@angular/router';
 
 import {HOME_PATH} from '../../app/root.routes';
 import {isBlank, log} from '../../shared';
-import {Buch, BuchValidator} from '../shared';
-import {BuecherService} from '../shared/buecher.service';
+import {Kunde, KundeValidator} from '../shared';
+import {KundenService} from '../shared/kunden.service';
 
 /**
  * Komponente f&uuml;r das Tag <code>my-stammdaten</code>
@@ -32,25 +32,86 @@ import {BuecherService} from '../shared/buecher.service';
     template: `
         <form [formGroup]="form" role="form">
             <div class="form-group row"
-                 [class.has-danger]="!titel.valid && titel.touched">
-                <label for="titelInput" class="col-sm-2 form-control-label">
-                    Titel *
+                 [class.has-danger]="!nachname.valid && nachname.touched">
+                <label for="nachnameInput" class="col-sm-2 form-control-label">
+                    Nachname *
                 </label>
                 <div class="col-sm-10">
-                    <input id="titelInput"
-                        placeholder="Titel"
+                    <input id="nachnameInput"
+                        placeholder="Nachname"
                         class="form-control form-control-danger"
                         autofocus
                         type="text"
-                        formControlName="titel">
+                        formControlName="nachname">
                     <div class="fa fa-exclamation-circle form-control-feedback"
-                        *ngIf="!titel.valid && titel.touched">
-                        Ein Buchtitel muss mit einem Buchstaben oder einer Ziffer
-                        beginnen.
+                        *ngIf="!nachname.valid && nachname.touched">
+                        Ein Name muss mit einem Buchstaben beginnen.
                     </div>
                 </div>
             </div>
 
+            <div class="form-group row"
+                 [class.has-danger]="!homepage.valid && homepage.touched">
+                <label for="homepageInput" class="col-sm-2 form-control-label">
+                    Homepage
+                </label>
+                <div class="col-sm-10">
+                    <input id="homepageInput"
+                        placeholder="Ihre Webseite"
+                        class="form-control form-control-danger"
+                        autofocus
+                        type="text"
+                        formControlName="homepage">
+                    <div class="fa fa-exclamation-circle form-control-feedback"
+                        *ngIf="!homepage.valid && homepage.touched">
+                        Ein Name muss mit einem Buchstaben beginnen.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row"
+                 [class.has-danger]="!email.valid && email.touched">
+                <label for="emailInput" class="col-sm-2 form-control-label">
+                    Email *
+                </label>
+                <div class="col-sm-10">
+                    <input id="emailInput"
+                        placeholder="max@beispiel.de"
+                        class="form-control form-control-danger"
+                        autofocus
+                        type="text"
+                        formControlName="email">
+                    <div class="fa fa-exclamation-circle form-control-feedback"
+                        *ngIf="!email.valid && email.touched">
+                        Email muss eingegeben werden
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            <div class="form-group row"
+                 [class.has-danger]="!adresse.valid && adresse.touched">
+                <label for="adresseInput" class="col-sm-2 form-control-label">
+                    Adresse *
+                </label>
+                <div class="col-sm-10">
+                    <input id="adresseInput"
+                        placeholder="Adresse"
+                        class="form-control form-control-danger"
+                        autofocus
+                        type="text"
+                        formControlName="adresse">
+                    <div class="fa fa-exclamation-circle form-control-feedback"
+                        *ngIf="!adresse.valid && adresse.touched">
+                        Eine Adresse muss eingegeben werden
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            
             <div class="form-group row">
                 <label class="col-sm-2 form-control-label">Art *</label>
                 <div class="col-sm-10">
@@ -81,7 +142,7 @@ import {BuecherService} from '../shared/buecher.service';
                 </div>
             </div>
 
-            <!--
+            
             <div class="form-group row">
                 <label for="datumInput" class="col-sm-2 form-control-label">
                     Datum
@@ -110,18 +171,18 @@ import {BuecherService} from '../shared/buecher.service';
 })
 export default class UpdateStammdatenComponent implements OnInit {
     // <stammdaten [buch]="...">
-    @Input() buch: Buch;
+    @Input() kunde: Kunde;
 
     form: FormGroup;
-    titel: FormControl;
-    art: FormControl;
-    verlag: FormControl;
-    rating: FormControl;
+    nachname: FormControl;
+    email: FormControl;
+    homepage: FormControl;
+    // adresse: FormControl;
     // datum: Control;
 
     constructor(
         private readonly formBuilder: FormBuilder,
-        private readonly buecherService: BuecherService,
+        private readonly kundenService: KundenService,
         private readonly router: Router) {
         console.log('UpdateStammdatenComponent.constructor()');
     }
@@ -132,22 +193,23 @@ export default class UpdateStammdatenComponent implements OnInit {
      */
     @log
     ngOnInit(): void {
-        console.log('buch=', this.buch);
+        console.log('kunde=', this.kunde);
 
         // Definition und Vorbelegung der Eingabedaten
-        this.titel = new FormControl(
-            this.buch.titel, [Validators.required as any, BuchValidator.titel]);
-        this.art = new FormControl(this.buch.art, Validators.required);
-        this.verlag = new FormControl(this.buch.verlag);
-        this.rating = new FormControl(this.buch.rating);
+        this.nachname = new FormControl(
+            this.kunde.nachname,
+            [Validators.required as any, KundeValidator.nachname]);
+        this.email = new FormControl(this.kunde.email, Validators.required);
+        this.homepage = new FormControl(this.kunde.homepage);
+        // this.adresse = new FormControl(this.kunde.adresse);
         // this.datum = new Control(this.buch.datum.toISOString());
 
         this.form = this.formBuilder.group({
             // siehe formControlName innerhalb von @Component({template: ...})
-            titel: this.titel,
-            art: this.art,
-            verlag: this.verlag,
-            rating: this.rating
+            nachname: this.nachname,
+            email: this.email,
+            homepage: this.homepage,
+            // adresse: this.adresse
             // datum: this.datum
         });
     }
@@ -165,24 +227,24 @@ export default class UpdateStammdatenComponent implements OnInit {
             return;
         }
 
-        if (isBlank(this.buch)) {
+        if (isBlank(this.kunde)) {
             console.error('buch === undefined/null');
             return;
         }
 
         // rating, preis und rabatt koennen im Formular nicht geaendert werden
-        this.buch.updateStammdaten(
-            this.titel.value, this.art.value, this.verlag.value,
-            this.rating.value, this.buch.datum, this.buch.preis,
-            this.buch.rabatt);
-        console.log('buch=', this.buch);
+        this.kunde.updateStammdaten(
+            this.nachname.value, this.email.value, this.kunde.newsletter,
+            this.kunde.umsatz, this.homepage.value, this.kunde.geschlecht,
+            this.kunde.username, this.kunde.adresse);
+        console.log('kunde=', this.kunde);
 
         const successFn: () => void = () => {
             console.log(`UpdateStammdaten: successFn: path: ${HOME_PATH}`);
             this.router.navigate([HOME_PATH]);
         };
         const errorFn: any = undefined;
-        this.buecherService.update(this.buch, successFn, errorFn);
+        this.kundenService.update(this.kunde, successFn, errorFn);
 
         // damit das (Submit-) Ereignis konsumiert wird und nicht an
         // uebergeordnete Eltern-Komponenten propagiert wird bis zum

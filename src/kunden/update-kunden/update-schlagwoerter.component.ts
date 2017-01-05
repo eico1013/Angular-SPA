@@ -84,9 +84,9 @@ export default class UpdateInteressenComponent implements OnInit {
         console.log('kunde=', this.kunde);
 
         // Definition und Vorbelegung der Eingabedaten (hier: Checkbox)
-        const hasJavaScript: boolean = this.kunde.hasInteresse('JAVASCRIPT');
+        const hasJavaScript: boolean = this.kunde.hasInteresse('R');
         this.javascript = new FormControl(hasJavaScript);
-        const hasTypeScript: boolean = this.kunde.hasInteresse('TYPESCRIPT');
+        const hasTypeScript: boolean = this.kunde.hasInteresse('L');
         this.typescript = new FormControl(hasTypeScript);
 
         this.form = this.formBuilder.group({

@@ -29,6 +29,7 @@ import CreateKundenComponent from '../kunden/create-kunden/create-kunden.compone
 import CreateKundenGuard from '../kunden/create-kunden/create-kunden.guard';
 import DetailsKundeComponent from '../kunden/details-kunden/details-kunde.component';
 import SucheKundenComponent from '../kunden/suche-kunden/suche-kunden.component';
+import UpdateKundeComponent from '../kunden/update-kunden/update-kunden.component';
 
 export const HOME_PATH: string = '';
 export const DETAILS_BUCH_PATH: string = 'detailsBuch';
@@ -51,7 +52,7 @@ const routes: Routes = [
     // id als Pfad-Parameter
     {path: `${DETAILS_KUNDE_PATH}/:id`, component: DetailsKundeComponent}, {
         path: 'updateKunde/:id',
-        component: UpdateBuchComponent,
+        component: UpdateKundeComponent,
         canActivate: [AdminGuard]
     },
     {
