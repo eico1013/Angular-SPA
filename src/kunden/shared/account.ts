@@ -18,8 +18,8 @@
 export class Account {
     public constructor(
 
-        public username: string|undefined, public passwort?: string|undefined) {
+        public username: string|undefined, public password?: string|undefined) {
         this.username = username || undefined;
-        this.passwort = passwort || undefined;
+        this.password = password || undefined;
     }
 }
