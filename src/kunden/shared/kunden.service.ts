@@ -207,11 +207,11 @@ export class KundenService {
 
         const headers: Headers =
             new Headers({'Content-Type': 'application/json'});
-        const authorization: string|undefined =
-            this.iamService.getAuthorization();
-        if (isPresent(authorization)) {
-            headers.append('Authorization', authorization as string);
-        }
+        // const authorization: string|undefined =
+        //     this.iamService.getAuthorization();
+        // if (isPresent(authorization)) {
+        //     headers.append('Authorization', authorization as string);
+        // }
         const options: RequestOptionsArgs = {headers: headers};
         console.log('options=', options);
 
