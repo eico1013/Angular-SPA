@@ -240,12 +240,19 @@ export class KundenService {
     update(
         kunde: Kunde, successFn: () => void,
         errorFn: (status: number, text: string) => void|undefined): void {
-        const uri: string = `${this.baseUriKunden}`;
-        const body: string = JSON.stringify(kunde.toJSON());
+        const uri: string = `${this.baseUriKunden}` + kunde._id;
+
+        const body: string =
+            '[ { \"op\": \"replace\", \"path\": \"/nachname\", \"value\": \"Testperson\" } ]';
+
         console.log('body=', body);
 
-        const headers: Headers =
-            new Headers({'Content-Type': 'application/json'});
+        const headers: Headers = new Headers({
+            'Content-Type': 'application/json-patch+json',
+            'Accept': '*/*',
+            'If-Match': '1'
+        });
+
         // const authorization: string|undefined =
         //    this.iamService.getAuthorization();
         // if (isPresent(authorization)) {

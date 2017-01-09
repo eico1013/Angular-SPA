@@ -94,7 +94,7 @@ export interface KundeForm extends KundeShared {
     ort?: string;
     betrag?: string;
     waehrung?: string;
-    passwort?: string;
+    password?: string;
     username?: string;
 }
 
@@ -223,9 +223,9 @@ export class Kunde {
             new Umsatz(kundeForm.betrag, kundeForm.waehrung);
         console.log('Umsatz from Form=', kundeForm.betrag, kundeForm.waehrung);
         const account: Account|undefined =
-            new Account(kundeForm.username, kundeForm.passwort);
+            new Account(kundeForm.username, kundeForm.password);
         console.log(
-            'Account from Form=', kundeForm.username, kundeForm.passwort);
+            'Account from Form=', kundeForm.username, kundeForm.password);
 
         const kunde: Kunde = new Kunde(
             kundeForm._id, kundeForm.nachname, kundeForm.email,

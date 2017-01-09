@@ -57,7 +57,7 @@ export default class CreateKundenComponent implements OnInit {
     readonly betrag: FormControl = new FormControl('123');
     readonly waehrung: FormControl = new FormControl(null);
     readonly username: FormControl = new FormControl(null);
-    readonly passwort: FormControl = new FormControl(null);
+    readonly password: FormControl = new FormControl(null);
     readonly S: FormControl = new FormControl(true);
     readonly R: FormControl = new FormControl(false);
     readonly L: FormControl = new FormControl(false);
@@ -98,7 +98,7 @@ export default class CreateKundenComponent implements OnInit {
             ort: this.ort,
             waehrung: this.waehrung,
             betrag: this.betrag,
-            passwort: this.passwort
+            password: this.password
         });
 
         this.titleService.setTitle('Neuer Kunde');
