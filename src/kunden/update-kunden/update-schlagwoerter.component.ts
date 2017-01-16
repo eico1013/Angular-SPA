@@ -35,14 +35,20 @@ import {KundenService} from '../shared/kunden.service';
                 <div class="offset-sm-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" formControlName="r">
+                            <input type="checkbox" formControlName="R">
                             R
                         </label>
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" formControlName="l">
+                            <input type="checkbox" formControlName="L">
                             L
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" formControlName="S">
+                            S
                         </label>
                     </div>
                 </div>

@@ -228,7 +228,7 @@ export default class UpdateStammdatenComponent implements OnInit {
         }
 
         if (isBlank(this.kunde)) {
-            console.error('buch === undefined/null');
+            console.error('kunde === undefined/null');
             return;
         }
 

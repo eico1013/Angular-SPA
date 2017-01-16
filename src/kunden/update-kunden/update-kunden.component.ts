@@ -44,10 +44,10 @@ import {KundenService} from '../shared/kunden.service';
                         Stammdaten
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="kunde.interessen.length !== 0">
+                <li class="nav-item">
                     <a class="nav-link" href="#interessen"
                        data-toggle="tab">
-                        Schlagw&ouml;rter
+                        Interessen
                     </a>
                 </li>
             </ul>
@@ -59,7 +59,7 @@ import {KundenService} from '../shared/kunden.service';
                         </my-update-stammdaten>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="schlagwoerter">
+                <div class="tab-pane fade" id="interessen">
                     <div class="mt-1">
                         <my-update-interessen [kunde]="kunde">
                         </my-update-interessen>
@@ -111,7 +111,7 @@ export default class UpdateKundeComponent implements OnInit {
         const next: (kunde: Kunde) => void = (kunde) => {
             this.errorMsg = null;
             this.kunde = kunde;
-            console.log('UpdateKundeComponent.buch=', this.kunde);
+            console.log('UpdateKundeComponent.kunde=', this.kunde);
         };
 
         this.kundenService.observeKunde(next);

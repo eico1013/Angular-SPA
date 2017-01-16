@@ -242,16 +242,32 @@ export class KundenService {
         errorFn: (status: number, text: string) => void|undefined): void {
         const uri: string = `${this.baseUriKunden}` + kunde._id;
 
-        const body: string =
-            '[ { \"op\": \"replace\", \"path\": \"/nachname\", \"value\": \"Testperson\" } ]';
+
+        var body: string =
+            '[ { \"op\": \"replace\", \"path\": \"/nachname\", \"value\": \"'
+            + kunde.nachname + '\" }, ' +
+            '{ \"op\": \"replace\", \"path\": \"/email\", \"value\": \"'
+            + kunde.email + '\" }, ' +
+            '{ \"op\": \"replace\", \"path\": \"/homepage\", \"value\": \"'
+            + kunde.homepage + '\" }' +
+            ', { "op": "add", "path": "/interessen", "value": "S" }' +
+            ', { "op": "remove", "path": "/interessen", "value": "S" }'
+            + (kunde.hasInteresse('S') ?
+                   ', { "op": "add", "path": "/interessen", "value": "S" }' :
+                   ', { "op": "remove", "path": "/interessen", "value": "S" }')
+            + (kunde.hasInteresse('L') ?
+                   ', { "op": "add", "path": "/interessen", "value": "L" }' :
+                   ', { "op": "remove", "path": "/interessen", "value": "L" }')
+            + (kunde.hasInteresse('R') ?
+                   ', { "op": "add", "path": "/interessen", "value": "R" }' :
+                   ', { "op": "remove", "path": "/interessen", "value": "R" }')
+            + ']';
+
 
         console.log('body=', body);
 
-        const headers: Headers = new Headers({
-            'Content-Type': 'application/json-patch+json',
-            'Accept': '*/*',
-            'If-Match': '1'
-        });
+        const headers: Headers = new Headers(
+            {'Content-Type': 'application/json-patch+json', 'If-Match': '5'});
 
         // const authorization: string|undefined =
         //    this.iamService.getAuthorization();
@@ -269,7 +285,7 @@ export class KundenService {
             }
         };
 
-        this.http.put(uri, body, options).subscribe(nextFn, errorFnPut);
+        this.http.patch(uri, body, options).subscribe(nextFn, errorFnPut);
     }
 
     /**
