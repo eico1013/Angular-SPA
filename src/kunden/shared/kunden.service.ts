@@ -202,6 +202,7 @@ export class KundenService {
 
         const uri: string = this.baseUriKunden;
         const body: string = JSON.stringify(neuerKunde.toJSON());
+        console.log('neuerKundeForm=', neuerKunde);
         console.log('body=', body);
 
         const headers: Headers =
