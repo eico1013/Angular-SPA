@@ -46,11 +46,11 @@ import SucheKundenComponent from './suche-kunden/suche-kunden.component';
 import SuchergebnisComponent from './suche-kunden/suchergebnis.component';
 // import SuchkriterienComponent from './suche-buecher/suchkriterien.component';
 import SuchkriterienComponent from './suche-kunden/suchkriterien.component';
-// import UpdateBuchComponent from './update-buch/update-buch.component';
-// import UpdateSchlagwoerterComponent from
-// './update-buch/update-schlagwoerter.component';
-// import UpdateStammdatenComponent from
-// './update-buch/update-stammdaten.component';
+import UpdateKundeComponent from './update-kunden/update-kunden.component';
+import UpdateSchlagwoerterComponent from
+'./update-kunden/update-schlagwoerter.component';
+import UpdateStammdatenComponent from
+'./update-kunden/update-stammdaten.component';
 
 const komponentenExport: Array<Type<any>> = [
     CreateKundenComponent, /*DetailsBuchComponent, BalkendiagrammComponent,
@@ -59,15 +59,14 @@ const komponentenExport: Array<Type<any>> = [
  UpdateBuchComponent*/
     /*CreateBuchComponent,*/ DetailsKundeComponent, /* BalkendiagrammComponent,
     LiniendiagrammComponent, TortendiagrammComponent, */
-    SucheKundenComponent                            /*,
-                           UpdateBuchComponent*/
+    SucheKundenComponent, UpdateKundeComponent
 ];
 
 const komponentenIntern: Array<Type<any>> = [
     DetailsInteressenComponent, DetailsStammdatenComponent,
     GefundeneKundenComponent, SucheKundenComponent, SuchergebnisComponent,
-    SuchkriterienComponent /*, UpdateSchlagwoerterComponent,
-     UpdateStammdatenComponent*/
+    SuchkriterienComponent, UpdateSchlagwoerterComponent,
+    UpdateStammdatenComponent
 ];
 
 // Ein Modul enthaelt logisch zusammengehoerige Funktionalitaet

@@ -231,41 +231,63 @@ export class KundenService {
         this.http.post(uri, body, options).subscribe(nextFn, errorFnPost);
     }
 
-    // /**
-    //  * Ein vorhandenes Buch aktualisieren
-    //  * @param buch Das JSON-Objekt mit den aktualisierten Buchdaten
-    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
-    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
-    //  */
-    // @log
-    // update(
-    //     buch: Buch, successFn: () => void,
-    //     errorFn: (status: number, text: string) => void|undefined): void {
-    //     const uri: string = `${this.baseUriBuecher}`;
-    //     const body: string = JSON.stringify(buch.toJSON());
-    //     console.log('body=', body);
+    /**
+     * Ein vorhandenes Buch aktualisieren
+     * @param buch Das JSON-Objekt mit den aktualisierten Buchdaten
+     * @param successFn Die Callback-Function fuer den Erfolgsfall
+     * @param errorFn Die Callback-Function fuer den Fehlerfall
+     */
+    @log
+    update(
+        kunde: Kunde, successFn: () => void,
+        errorFn: (status: number, text: string) => void|undefined): void {
+        const uri: string = `${this.baseUriKunden}` + kunde._id;
 
-    //     const headers: Headers =
-    //         new Headers({'Content-Type': 'application/json'});
-    //     const authorization: string|undefined =
-    //         this.iamService.getAuthorization();
-    //     if (isPresent(authorization)) {
-    //         headers.append('Authorization', authorization as string);
-    //     }
-    //     const options: RequestOptionsArgs = {headers: headers};
-    //     console.log('options=', options);
 
-    //     const nextFn: ((response: Response) => void) = (response) =>
-    //         successFn();
-    //     const errorFnPut: ((errResponse: Response) => void) = (errResponse)
-    //     => {
-    //         if (isPresent(errorFn)) {
-    //             errorFn(errResponse.status, errResponse.text());
-    //         }
-    //     };
+        var body: string =
+            '[ { \"op\": \"replace\", \"path\": \"/nachname\", \"value\": \"'
+            + kunde.nachname + '\" }, ' +
+            '{ \"op\": \"replace\", \"path\": \"/email\", \"value\": \"'
+            + kunde.email + '\" }, ' +
+            '{ \"op\": \"replace\", \"path\": \"/homepage\", \"value\": \"'
+            + kunde.homepage + '\" }' +
+            ', { "op": "add", "path": "/interessen", "value": "S" }' +
+            ', { "op": "remove", "path": "/interessen", "value": "S" }'
+            + (kunde.hasInteresse('S') ?
+                   ', { "op": "add", "path": "/interessen", "value": "S" }' :
+                   ', { "op": "remove", "path": "/interessen", "value": "S" }')
+            + (kunde.hasInteresse('L') ?
+                   ', { "op": "add", "path": "/interessen", "value": "L" }' :
+                   ', { "op": "remove", "path": "/interessen", "value": "L" }')
+            + (kunde.hasInteresse('R') ?
+                   ', { "op": "add", "path": "/interessen", "value": "R" }' :
+                   ', { "op": "remove", "path": "/interessen", "value": "R" }')
+            + ']';
 
-    //     this.http.put(uri, body, options).subscribe(nextFn, errorFnPut);
-    // }
+
+        console.log('body=', body);
+
+        const headers: Headers = new Headers(
+            {'Content-Type': 'application/json-patch+json', 'If-Match': '5'});
+
+        // const authorization: string|undefined =
+        //    this.iamService.getAuthorization();
+        // if (isPresent(authorization)) {
+        //     headers.append('Authorization', authorization as string);
+        // }
+        const options: RequestOptionsArgs = {headers: headers};
+        console.log('options=', options);
+
+        const nextFn: ((response: Response) => void) = (response) =>
+            successFn();
+        const errorFnPut: ((errResponse: Response) => void) = (errResponse) => {
+            if (isPresent(errorFn)) {
+                errorFn(errResponse.status, errResponse.text());
+            }
+        };
+
+        this.http.patch(uri, body, options).subscribe(nextFn, errorFnPut);
+    }
 
     /**
      * Ein Buch l&ouml;schen

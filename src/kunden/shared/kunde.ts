@@ -307,20 +307,17 @@ export class Kunde {
     //  * @param preis Der neue Preis
     //  * @param rabatt Der neue Rabatt
     //  */
-    // updateStammdaten(
-    //     titel: string, art: BuchArt, verlag: Verlag, rating: number,
-    //     datum: Moment|undefined, preis: number|undefined,
-    //     rabatt: number|undefined): void {
-    //     this.titel = titel;
-    //     this.art = art;
-    //     this.verlag = verlag;
-    //     this.rating = rating;
-    //     this.ratingArray = [];
-    //     _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
-    //     this.datum = datum;
-    //     this.preis = preis;
-    //     this.rabatt = rabatt;
-    // }
+    updateStammdaten(nachname: string, email: string, homepage: string): void {
+        this.nachname = nachname;
+        this.email = email;
+        this.homepage = homepage;
+        // this.rating = rating;
+        // this.ratingArray = [];
+        // _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
+        // this.datum = datum;
+        // this.preis = preis;
+        // this.rabatt = rabatt;
+    }
 
     /**
      * Abfrage, ob es zum Buch auch Schlagw&ouml;rter gibt.
@@ -352,15 +349,18 @@ export class Kunde {
     //  * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
     //  * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
     //  */
-    // updateSchlagwoerter(javascript: boolean, typescript: boolean): void {
-    //     this.resetSchlagwoerter();
-    //     if (javascript) {
-    //         this.addSchlagwort('JAVASCRIPT');
-    //     }
-    //     if (typescript) {
-    //         this.addSchlagwort('TYPESCRIPT');
-    //     }
-    // }
+    updateInteressen(S: boolean, R: boolean, L: boolean): void {
+        this.resetInteressen();
+        if (S) {
+            this.addInteresse('S');
+        }
+        if (R) {
+            this.addInteresse('R');
+        }
+        if (L) {
+            this.addInteresse('L');
+        }
+    }
 
     /**
      * Konvertierung des Kundenobjektes in ein JSON-Objekt f&uuml;r den RESTful
@@ -422,16 +422,15 @@ export class Kunde {
         // this.email = email || undefined;
     }
 
-    // private resetInteressen(): void {
-    //     this.interessen = [];
-    // }
+    private resetInteressen(): void {
+        this.interessen = [];
+    }
 
-    // private addInteresse(interesse: string): void {
-    //     if (isBlank(this.interessen)) {
-    //         this.interessen = [];
-    //     }
-    //     const tmpInteressen: Array<string> =
-    //         this.interessen as Array<string>;
-    //     tmpInteressen.push(interesse);
-    // }
+    private addInteresse(interesse: string): void {
+        if (isBlank(this.interessen)) {
+            this.interessen = [];
+        }
+        const tmpInteressen: Array<string> = this.interessen as Array<string>;
+        tmpInteressen.push(interesse);
+    }
 }
