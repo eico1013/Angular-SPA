@@ -51,25 +51,6 @@ import {KundenService} from '../shared/kunden.service';
             </div>
 
             <div class="form-group row"
-                 [class.has-danger]="!homepage.valid && homepage.touched">
-                <label for="homepageInput" class="col-sm-2 form-control-label">
-                    Homepage
-                </label>
-                <div class="col-sm-10">
-                    <input id="homepageInput"
-                        placeholder="Ihre Webseite"
-                        class="form-control form-control-danger"
-                        autofocus
-                        type="text"
-                        formControlName="homepage">
-                    <div class="fa fa-exclamation-circle form-control-feedback"
-                        *ngIf="!homepage.valid && homepage.touched">
-                        Ein Name muss mit einem Buchstaben beginnen.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row"
                  [class.has-danger]="!email.valid && email.touched">
                 <label for="emailInput" class="col-sm-2 form-control-label">
                     Email *
@@ -87,74 +68,6 @@ import {KundenService} from '../shared/kunden.service';
                     </div>
                 </div>
             </div>
-
-            <!--
-            <div class="form-group row"
-                 [class.has-danger]="!adresse.valid && adresse.touched">
-                <label for="adresseInput" class="col-sm-2 form-control-label">
-                    Adresse *
-                </label>
-                <div class="col-sm-10">
-                    <input id="adresseInput"
-                        placeholder="Adresse"
-                        class="form-control form-control-danger"
-                        autofocus
-                        type="text"
-                        formControlName="adresse">
-                    <div class="fa fa-exclamation-circle form-control-feedback"
-                        *ngIf="!adresse.valid && adresse.touched">
-                        Eine Adresse muss eingegeben werden
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            
-            <div class="form-group row">
-                <label class="col-sm-2 form-control-label">Art *</label>
-                <div class="col-sm-10">
-                    <select class="form-control" formControlName="art">
-                        <option value="DRUCKAUSGABE">Druckausgabe</option>
-                        <option value="KINDLE">Kindle</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 form-control-label">Verlag</label>
-                <div class="col-sm-10">
-                    <select class="form-control" formControlName="verlag">
-                        <option value="IWI_VERLAG">Iwi Verlag</option>
-                        <option value="HSKA_VERLAG">Hska Verlag</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="ratingInput" class="col-sm-2 form-control-label">
-                    Bewertung
-                </label>
-                <div class="col-sm-10">
-                    <input id="ratingInput" type="range" min="0" max="5"
-                        formControlName="rating">
-                </div>
-            </div>
-
-            
-            <div class="form-group row">
-                <label for="datumInput" class="col-sm-2 form-control-label">
-                    Datum
-                </label>
-                <div class="col-sm-10">
-                    <input id="datumInput"
-                        class="form-control"
-                        type="date"
-                        formControlName="datum"/>
-                </div>
-            </div>
-            -->
 
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
@@ -200,17 +113,11 @@ export default class UpdateStammdatenComponent implements OnInit {
             this.kunde.nachname,
             [Validators.required as any, KundeValidator.nachname]);
         this.email = new FormControl(this.kunde.email, Validators.required);
-        this.homepage = new FormControl(this.kunde.homepage);
-        // this.adresse = new FormControl(this.kunde.adresse);
-        // this.datum = new Control(this.buch.datum.toISOString());
 
         this.form = this.formBuilder.group({
             // siehe formControlName innerhalb von @Component({template: ...})
             nachname: this.nachname,
-            email: this.email,
-            homepage: this.homepage,
-            // adresse: this.adresse
-            // datum: this.datum
+            email: this.email
         });
     }
 
@@ -233,8 +140,7 @@ export default class UpdateStammdatenComponent implements OnInit {
         }
 
         // rating, preis und rabatt koennen im Formular nicht geaendert werden
-        this.kunde.updateStammdaten(
-            this.nachname.value, this.email.value, this.homepage.value);
+        this.kunde.updateStammdaten(this.nachname.value, this.email.value);
         console.log('kunde=', this.kunde);
         console.log('Ausgabe1A');
         const successFn: () => void = () => {
