@@ -248,11 +248,7 @@ export class KundenService {
             '[ { \"op\": \"replace\", \"path\": \"/nachname\", \"value\": \"'
             + kunde.nachname + '\" }, ' +
             '{ \"op\": \"replace\", \"path\": \"/email\", \"value\": \"'
-            + kunde.email + '\" }, ' +
-            '{ \"op\": \"replace\", \"path\": \"/homepage\", \"value\": \"'
-            + kunde.homepage + '\" }' +
-            ', { "op": "add", "path": "/interessen", "value": "S" }' +
-            ', { "op": "remove", "path": "/interessen", "value": "S" }'
+            + kunde.email + '\" }'
             + (kunde.hasInteresse('S') ?
                    ', { "op": "add", "path": "/interessen", "value": "S" }' :
                    ', { "op": "remove", "path": "/interessen", "value": "S" }')

@@ -307,16 +307,9 @@ export class Kunde {
     //  * @param preis Der neue Preis
     //  * @param rabatt Der neue Rabatt
     //  */
-    updateStammdaten(nachname: string, email: string, homepage: string): void {
+    updateStammdaten(nachname: string, email: string): void {
         this.nachname = nachname;
         this.email = email;
-        this.homepage = homepage;
-        // this.rating = rating;
-        // this.ratingArray = [];
-        // _.times(rating - MIN_RATING, () => this.ratingArray.push(true));
-        // this.datum = datum;
-        // this.preis = preis;
-        // this.rabatt = rabatt;
     }
 
     /**
